@@ -1,0 +1,115 @@
+:host {
+  display: block;
+}
+/*since tinymce oxide/skin.css is not loading*/
+.tox:not([dir=rtl]) {
+  direction: ltr;
+  text-align: left;
+}
+.tox-tinymce {
+  border: 1px solid #ccc;
+  border-radius: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  overflow: hidden;
+  position: relative;
+  visibility: inherit!important;
+}
+.tox {
+  box-shadow: none;
+  box-sizing: content-box;
+  color: #222f3e;
+  cursor: auto;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  vertical-align: initial;
+  white-space: normal;
+}
+.tox .tox-editor-container {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  overflow: hidden;
+}
+.tox .tox-menubar {
+  background-color: #fff;
+  display: flex;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  padding: 0 4px 0 4px;
+}
+
+.tox .tox-toolbar-overlord {
+  background-color: #fff;
+}
+.tox .tox-anchorbar {
+  display: flex;
+  flex: 0 0 auto;
+}
+.tox .tox-sidebar-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  -ms-flex-preferred-size: 0;
+  min-height: 0;
+}
+.tox .tox-edit-area {
+  display: flex;
+  flex: 1;
+  -ms-flex-preferred-size: auto;
+  overflow: hidden;
+  position: relative;
+}
+.tox .tox-edit-area__iframe {
+  background-color: #fff;
+  border: 0;
+  box-sizing: border-box;
+  flex: 1;
+  -ms-flex-preferred-size: auto;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+.tox .tox-sidebar--sliding-closed {
+  opacity: 0;
+}
+.tox .tox-sidebar__slider {
+  display: flex;
+  overflow: hidden;
+}
+.tox .tox-sidebar {
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.tox .tox-statusbar {
+  align-items: center;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  color: rgba(34,47,62,.7);
+  display: flex;
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 400;
+  height: 18px;
+  overflow: hidden;
+  padding: 0 8px;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.tox-notifications-container {
+  display: none !important;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+
+    <script type="module" src="/build/my-first-stencil-project.esm.js"></script>
+    <script nomodule src="/build/my-first-stencil-project.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-webcomponent@1/dist/tinymce-webcomponent.js"></script> -->
+    <!-- <script src="../node_modules/tinymce/tinymce.min.js" referrerpolicy="origin"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/tinymce.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/jquery.tinymce.min.js"></script> -->
+  </head>
+  <body>
+    <h1>RTF editor</h1>
+    <!-- <rtf-editor></rtf-editor> -->
+    <custom-rtf></custom-rtf>
+    <!-- <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component> -->
+    <payform-component amount-payable="5000"  api-key="fd937be4428d64cf4dd1b51146aef28e46d224aea7ea5bdfbbb6d296a05ec1a9"> 
+      <slot name='my-title' />
+      <slot name='my-description' />
+    </payform-component>
+
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+          const cryptoView = document.querySelector('payform-component');
+          setTimeout(() => {
+              cryptoView.refreshCryptoData();
+          }, 2000);
+      })
+  </script>
+
+  </body>
+</html>
