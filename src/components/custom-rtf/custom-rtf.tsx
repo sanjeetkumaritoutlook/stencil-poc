@@ -1,4 +1,4 @@
-import { Component, h } from '@stencil/core';
+import { Component, h, Listen } from '@stencil/core';
 //npm i query-selector-shadow-dom
 import {  querySelectorDeep} from "query-selector-shadow-dom";
 //https://www.tiny.cloud/docs/advanced/usage-with-module-loaders/webpack/webpack_es6_npm/
@@ -38,9 +38,9 @@ import contentCss from '../../../node_modules/tinymce/skins/content/default/cont
 //TypeScript needs type definitions to understand the structure of the 'tinymce' module. 
 //npm install --save-dev @types/tinymce
 
-//Cannot find name 'tinymce'
-//due to TypeScript not recognizing the 'tinymce' module. 
-//  declare const tinymce: any;
+//stackblitz
+// https://stackblitz.com/github/ionic-team/stencil-component-starter?file=readme.md
+//https://stackblitz.com/edit/github-mfsmeh-gx5b4v?file=src%2Fcomponents%2Frtf-editor%2Frtf-editor.tsx
 
 @Component({
   tag: 'custom-rtf',
@@ -49,7 +49,8 @@ import contentCss from '../../../node_modules/tinymce/skins/content/default/cont
 })
 export class CustomRtf {
   private editor: any; // Store a reference to the TinyMCE editor instance
-  
+ // @State() editor: any; // Assuming you have a state variable to hold the Tinymce editor instance
+
   //initialize TinyMCE properly within your component. lifecycle method
   componentDidLoad() {
    // Check if editor is already initialized
@@ -71,8 +72,9 @@ export class CustomRtf {
      width:600,
      height: 300,
      theme: 'silver',        // Choose a theme ('modern', 'silver', 'inlite', etc.)
-     skin: false,
-     skin_url: '../../../node_modules/tinymce/skins/ui/oxide',
+     skin: 'oxide',
+     //Copy Tinymce assets to a local folder, for example, 'src/assets/tinymce/'.
+    skin_url: '../../assets/tinymce/skins/ui/oxide',
       // plugins: [
       //   "powerpaste advlist advtable autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
       //   "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
@@ -91,11 +93,8 @@ export class CustomRtf {
       paste_data_images: true,
       paste_as_text: true,          
       noneditable_noneditable_class: 'mceNonEditable',
-      content_css: [
-        '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-        '//www.tiny.cloud/css/codepen.min.css'
-      ],
-    //  content_css: '../../../node_modules/tinymce/skins/ui/oxide/content.css',
+      //directly referencing paths within node_modules is not always recommended.
+     content_css: '../../assets/tinymce/skins/ui/oxide/content.css',
       content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
       //setup callback assigns the editor 
       setup: (editor) => {
@@ -103,23 +102,31 @@ export class CustomRtf {
         editor.on('keyup', () => {
           console.log('Editor was clicked');
       });
+       // Add an event listener for the input event
+       editor.on('input', () => {
+        this.handleEditorInput();
+      });
       },
     });
   
   }
   }
   }
+
+    // Custom logic to handle input events
+    handleEditorInput() {
+      // Access the content of the editor
+      const editorContent = this.editor.getContent();
+      // Implement your custom logic here
+      console.log('Editor content changed:', editorContent);
+    }
+  @Listen('input', { target: 'document' })
+  handleInput() {
+    // Handle input events if needed
+  }
   
-  // async componentWillLoad() {
-  //   try {
-  //     const response = await fetch('models/dom/model.js');
-  //     const modelData = await response.json();
-  //     // Handle the loaded model data
-  //   } catch (error) {
-  //     console.error('Error loading model:', error);
-  //   }
-  // }
-  //Before performing any operations- GET or SET- ensure that the this.editor instance
+  
+  //Before performing any operations- GET or SET- ensure that the this.editor instance is available
   getContentFromEditor() {
     if (this.editor) {
       // Access properties or methods of the TinyMCE editor instance
