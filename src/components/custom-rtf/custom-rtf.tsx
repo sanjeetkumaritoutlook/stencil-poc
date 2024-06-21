@@ -65,6 +65,7 @@ export class CustomRtf {
        //https://www.tiny.cloud/docs/configure/integration-and-setup/
        //https://www.tiny.cloud/docs/configure/editor-appearance/#skin_url
        //https://www.tiny.cloud/docs/tinymce/latest/basic-setup/ 
+      promotion: false, //hides the Upgrade promotion button
      apiKey:"qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc",
     //apiKey="limjfdlb66u3w96h1skw5m93kdvmf55zt4ohb3ol4jeb3q6m",
     fontsize_formats: "2pt 4pt 6pt 8pt 10pt 12pt 14pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 32pt 34pt 36pt",
