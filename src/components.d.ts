@@ -7,6 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface CustomRtf {
+        "initialvalue": string;
     }
     interface MyComponent {
         /**
@@ -36,6 +37,10 @@ export namespace Components {
     }
     interface RtfEditor {
     }
+}
+export interface CustomRtfCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCustomRtfElement;
 }
 declare global {
     interface HTMLCustomRtfElement extends Components.CustomRtf, HTMLStencilElement {
@@ -85,6 +90,11 @@ declare global {
 }
 declare namespace LocalJSX {
     interface CustomRtf {
+        "initialvalue"?: string;
+        "onContentChanged"?: (event: CustomRtfCustomEvent<any>) => void;
+        "onEditorBlur"?: (event: CustomRtfCustomEvent<void>) => void;
+        "onEditorFocus"?: (event: CustomRtfCustomEvent<void>) => void;
+        "onValueChange"?: (event: CustomRtfCustomEvent<string>) => void;
     }
     interface MyComponent {
         /**
