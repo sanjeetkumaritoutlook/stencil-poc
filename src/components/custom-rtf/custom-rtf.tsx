@@ -5,25 +5,25 @@ import {  querySelectorDeep} from "query-selector-shadow-dom";
 //npm install tinymce
 import tinymce from 'tinymce';    //simply import 'tinymce' doesnt work
 //https://www.tiny.cloud/docs/tinymce/latest/bundling-models/
-import '../../../node_modules/tinymce/models/dom/model';
+import 'tinymce/models/dom/model';
 
 //https://stackoverflow.com/questions/68951483/tinymce-err-aborted-404-not-found-skins-vue
  /* Default icons are required for TinyMCE 5.3 or above */
- import '../../../node_modules/tinymce/icons/default';
+ import 'tinymce/icons/default';
 
  /* A theme is also required */
- import '../../../node_modules/tinymce/themes/silver';
+ import 'tinymce/themes/silver';
  /* Import the skin */
- import '../../../node_modules/tinymce/skins/ui/oxide/skin.css';
+ import 'tinymce/skins/ui/oxide/skin.css';
 
  /* Import plugins */
- import '../../../node_modules/tinymce/plugins/advlist';
- import '../../../node_modules/tinymce/plugins/code';
- import '../../../node_modules/tinymce/plugins/emoticons';
- import '../../../node_modules/tinymce/plugins/emoticons/js/emojis';
- import '../../../node_modules/tinymce/plugins/link';
- import '../../../node_modules/tinymce/plugins/lists';
- import '../../../node_modules/tinymce/plugins/table';
+ import 'tinymce/plugins/advlist';
+ import 'tinymce/plugins/code';
+ import 'tinymce/plugins/emoticons';
+ import 'tinymce/plugins/emoticons/js/emojis';
+ import 'tinymce/plugins/link';
+ import 'tinymce/plugins/lists';
+ import 'tinymce/plugins/table';
 
  /* Import premium plugins */
  /* NOTE: Download separately and add these to /src/plugins */
@@ -31,8 +31,8 @@ import '../../../node_modules/tinymce/models/dom/model';
  /* import './plugins/powerpaste/plugin'; */
  /* import './plugins/powerpaste/js/wordimport'; *
 /* Import content css */
-import contentUiCss from '../../../node_modules/tinymce/skins/ui/oxide/content.min.css';
-import contentCss from '../../../node_modules/tinymce/skins/content/default/content.css';
+//import contentUiCss from 'tinymce/skins/ui/oxide/content.min.css';
+//import contentCss from 'tinymce/skins/content/default/content.css';
 import { myString } from './tablecode';
 //npm install tinymce@^5
 //TypeScript needs type definitions to understand the structure of the 'tinymce' module. 
@@ -80,6 +80,7 @@ export class CustomRtf {
       //Create a configuration object for TinyMCE. Customize it according to your needs:
      // selector: 'textarea',
      target: textarea,  // HTML element convert into a TinyMCE editor.
+      placeholder: 'Type here...',
        // Other configurations...
        //https://www.tiny.cloud/docs/configure/integration-and-setup/
        //https://www.tiny.cloud/docs/configure/editor-appearance/#skin_url
@@ -116,7 +117,8 @@ export class CustomRtf {
       noneditable_noneditable_class: 'mceNonEditable',
       //directly referencing paths within node_modules is not always recommended.
      content_css: '../../assets/tinymce/skins/ui/oxide/content.css',
-      content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
+      // content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
+      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
       //https://www.tiny.cloud/docs/tinymce/latest/tinymce-for-mobile/
       mobile: {
         theme: 'silver',
