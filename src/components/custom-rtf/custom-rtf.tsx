@@ -117,8 +117,12 @@ export class CustomRtf {
       //directly referencing paths within node_modules is not always recommended.
      content_css: '../../assets/tinymce/skins/ui/oxide/content.css',
       content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
+      //https://www.tiny.cloud/docs/tinymce/latest/tinymce-for-mobile/
       mobile: {
-        theme: 'mobile',
+        theme: 'silver',
+        width:350,
+        height: 350,
+        menubar: true,
         plugins: ['autosave', 'lists', 'autolink']
       },
       //setup callback assigns the editor 
