@@ -92,8 +92,11 @@ export class CustomRtf {
      font_formats: 'Arial=arial,helvetica,sans-serif; Courier New=courier new,courier,monospace; AkrutiKndPadmini=Akpdmi-n',
      width:800,
      height: 350,
+     resize:'both', //https://www.tiny.cloud/docs/tinymce/latest/editor-size-options/
      theme: 'silver',        // Choose a theme ('modern', 'silver', 'inlite','mobile' etc.)
-     skin: 'oxide',
+     //https://www.tiny.cloud/docs/tinymce/latest/editor-skin/
+     //skin: 'oxide',
+     skin: false,
      //Copy Tinymce assets to a local folder, for example, 'src/assets/tinymce/'.
     skin_url: '../../assets/tinymce/skins/ui/oxide',
     //skin_url: this.skinUrl,
@@ -116,6 +119,9 @@ export class CustomRtf {
       paste_as_text: true,          
       noneditable_noneditable_class: 'mceNonEditable',
       //directly referencing paths within node_modules is not always recommended.
+      //CSS hacks
+      //https://www.tiny.cloud/blog/css-hacks/
+      //https://github.com/tinymce/tinymce/issues/4886
      content_css: '../../assets/tinymce/skins/ui/oxide/content.css',
       // content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
       content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',

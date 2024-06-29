@@ -1,6 +1,12 @@
-@import '~tinymce/skins/content/default/content.min.css';
 @import '~tinymce/skins/ui/oxide/skin.min.css';
 
 :host {
   display: block;
 }
+/* Center editor horizontally */
+/*CSS hacks - https://www.tiny.cloud/blog/css-hacks/  */
+  /* Capped width */
+/* #my-tinymce-component + .tox.tox-tinymce {
+  max-width: 32rem; 
+  margin: auto;
+} */
