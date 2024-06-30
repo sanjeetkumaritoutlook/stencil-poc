@@ -4,6 +4,14 @@ import {  querySelectorDeep} from "query-selector-shadow-dom";
 //https://www.tiny.cloud/docs/advanced/usage-with-module-loaders/webpack/webpack_es6_npm/
 //npm install tinymce
 import tinymce from 'tinymce';    //simply import 'tinymce' doesnt work
+//Demo pages
+//https://www.tiny.cloud/docs/tinymce/latest/full-featured-premium-demo/
+//https://www.tiny.cloud/docs/tinymce/latest/examples/
+//https://www.tiny.cloud/docs/tinymce/latest/plugins/
+//https://www.tiny.cloud/docs/tinymce/latest/full-featured-open-source-demo/
+//$450 per year https://www.tiny.cloud/tinymce-vs-ckeditor/
+//https://ckeditor.com/ckeditor-5/demo/
+
 //https://www.tiny.cloud/docs/tinymce/latest/bundling-models/
 import 'tinymce/models/dom/model';
 
@@ -24,6 +32,11 @@ import 'tinymce/models/dom/model';
  import 'tinymce/plugins/link';
  import 'tinymce/plugins/lists';
  import 'tinymce/plugins/table';
+ import 'tinymce/plugins/wordcount';
+ import 'tinymce/plugins/autolink';
+ import 'tinymce/plugins/autosave';
+ import 'tinymce/plugins/image';
+ import 'tinymce/plugins/insertdatetime';
 
  /* Import premium plugins */
  /* NOTE: Download separately and add these to /src/plugins */
@@ -49,6 +62,8 @@ import { myString } from './tablecode';
 })
 export class CustomRtf {
   @Prop() initialvalue: string;
+  //to control whether the tinymce editor is editable
+  @Prop() disabled: boolean = false; 
 
   @Event() valueChange: EventEmitter<string>;
   @Event() editorFocus: EventEmitter<void>;
@@ -90,7 +105,7 @@ export class CustomRtf {
     //apiKey="limjfdlb66u3w96h1skw5m93kdvmf55zt4ohb3ol4jeb3q6m",
     fontsize_formats: "2pt 4pt 6pt 8pt 10pt 12pt 14pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 32pt 34pt 36pt",
      font_formats: 'Arial=arial,helvetica,sans-serif; Courier New=courier new,courier,monospace; AkrutiKndPadmini=Akpdmi-n',
-     width:800,
+     width:'100%',
      height: 350,
      resize:'both', //https://www.tiny.cloud/docs/tinymce/latest/editor-size-options/
      theme: 'silver',        // Choose a theme ('modern', 'silver', 'inlite','mobile' etc.)
@@ -103,17 +118,15 @@ export class CustomRtf {
       // plugins: [
       //   "powerpaste advlist advtable autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
       //   "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-      //   "save table contextmenu directionality emoticons template paste textcolor filemanager"
+      //   "save table contextmenu directionality emoticons template paste textcolor filemanager help"
       // ],
-      plugins: [  "code", "table", "link","advlist", "lists"],
+     plugins: [  "code", "table", "link","advlist", "lists","wordcount","autolink","autosave","image","insertdatetime"],
        block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
       branding: false,
        menubar: 'file edit view insert format tools table tc help',
-      toolbar: 'undo redo | formatselect | ' +
-               'bold italic backcolor | alignleft aligncenter ' +
-               'alignright alignjustify | bullist numlist outdent indent | ' +
-               'removeformat | help',
-      //paste Core plugin options
+       toolbar: "undo redo | accordion accordionremove | blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | ltr rtl",
+      //  language: 'en', 
+       //paste Core plugin options
       paste_block_drop: false,
       paste_data_images: true,
       paste_as_text: true,          
@@ -128,7 +141,7 @@ export class CustomRtf {
       //https://www.tiny.cloud/docs/tinymce/latest/tinymce-for-mobile/
       mobile: {
         theme: 'silver',
-        width:350,
+        width:'100%',
         height: 350,
         menubar: true,
         plugins: ['autosave', 'lists', 'autolink']
@@ -161,8 +174,11 @@ export class CustomRtf {
       editor.on('blur', () => {
         this.editorBlur.emit();
       });
-
-
+      //https://www.tiny.cloud/docs/tinymce/latest/apis/tinymce.editormode/#set
+      //https://stackoverflow.com/questions/13881812/make-readonly-disable-tinymce-textarea
+      if (this.disabled) {
+        editor.mode.set('readonly');
+      }
       },
     });
   

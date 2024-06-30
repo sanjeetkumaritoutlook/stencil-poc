@@ -7,6 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface CustomRtf {
+        "disabled": boolean;
         "initialvalue": string;
     }
     interface MyComponent {
@@ -90,6 +91,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface CustomRtf {
+        "disabled"?: boolean;
         "initialvalue"?: string;
         "onContentChanged"?: (event: CustomRtfCustomEvent<any>) => void;
         "onEditorBlur"?: (event: CustomRtfCustomEvent<void>) => void;
