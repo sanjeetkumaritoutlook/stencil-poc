@@ -122,7 +122,7 @@ export class CustomRtf {
       //CSS hacks
       //https://www.tiny.cloud/blog/css-hacks/
       //https://github.com/tinymce/tinymce/issues/4886
-     content_css: '../../assets/tinymce/skins/ui/oxide/content.css',
+     content_css: '../../assets/tinymce/skins/ui/oxide/content.min.css',
       // content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
       content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
       //https://www.tiny.cloud/docs/tinymce/latest/tinymce-for-mobile/
