@@ -44,8 +44,8 @@ import 'tinymce/models/dom/model';
  /* import './plugins/powerpaste/plugin'; */
  /* import './plugins/powerpaste/js/wordimport'; *
 /* Import content css */
-//import contentUiCss from 'tinymce/skins/ui/oxide/content.min.css';
-//import contentCss from 'tinymce/skins/content/default/content.css';
+import contentUiCss from 'tinymce/skins/ui/oxide/content.min.css';
+import contentCss from 'tinymce/skins/content/default/content.css';
 import { myString } from './tablecode';
 //npm install tinymce@^5
 //TypeScript needs type definitions to understand the structure of the 'tinymce' module. 
@@ -101,7 +101,7 @@ export class CustomRtf {
        //https://www.tiny.cloud/docs/configure/editor-appearance/#skin_url
        //https://www.tiny.cloud/docs/tinymce/latest/basic-setup/ 
       promotion: false, //hides the Upgrade promotion button
-     apiKey:"qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc",
+    // apiKey:"qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc",
     //apiKey="limjfdlb66u3w96h1skw5m93kdvmf55zt4ohb3ol4jeb3q6m",
     fontsize_formats: "2pt 4pt 6pt 8pt 10pt 12pt 14pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 32pt 34pt 36pt",
      font_formats: 'Arial=arial,helvetica,sans-serif; Courier New=courier new,courier,monospace; AkrutiKndPadmini=Akpdmi-n',
@@ -124,7 +124,7 @@ export class CustomRtf {
        block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
       branding: false,
        menubar: 'file edit view insert format tools table tc help',
-       toolbar: "undo redo | accordion accordionremove | blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | ltr rtl",
+       toolbar: "undo redo | formatselect  | accordion accordionremove | blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | ltr rtl",
       //  language: 'en', 
        //paste Core plugin options
       paste_block_drop: false,
@@ -136,8 +136,9 @@ export class CustomRtf {
       //https://www.tiny.cloud/blog/css-hacks/
       //https://github.com/tinymce/tinymce/issues/4886
      content_css: '../../assets/tinymce/skins/ui/oxide/content.min.css',
-      // content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
-      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+       content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
+     //Set the default font: https://www.tiny.cloud/blog/tinymce-custom-font-family/
+       //content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
       //https://www.tiny.cloud/docs/tinymce/latest/tinymce-for-mobile/
       mobile: {
         theme: 'silver',
@@ -231,8 +232,10 @@ export class CustomRtf {
     this.editor = null; // Clear the reference during component unload
   }
   render() {
+    // Generate a unique ID for the editor container
+    let editorId = `editor-${Math.floor(Math.random() * 1000)}`;
     return (
-       <div>
+       <div id={editorId}>
         {/* <button onClick={() => this.handleEvent()}>Click me</button> */}
         <div id="my-tinymce-component" innerHTML={this.initialvalue}></div>
         <button onClick={() => this.getContentFromEditor()}>Get Content/Save </button>
