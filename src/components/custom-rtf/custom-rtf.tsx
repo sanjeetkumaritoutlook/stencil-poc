@@ -61,7 +61,7 @@ import { myString } from './tablecode';
   shadow: true,
 })
 export class CustomRtf {
-  @Prop() initialvalue: string;
+  @Prop({ mutable: true, reflect: true }) initialvalue: string;
   //to control whether the tinymce editor is editable
   @Prop() disabled: boolean = false; 
 
