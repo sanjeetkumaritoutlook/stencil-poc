@@ -18,3 +18,9 @@
   max-width: 32rem; 
   margin: auto;
 } */
+ /*css hack to remove outer black border to apply label  same as FLUID Input*/
+/* .tox-tinymce{
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+} */

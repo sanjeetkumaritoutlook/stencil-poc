@@ -6,6 +6,7 @@ import {  querySelectorDeep} from "query-selector-shadow-dom";
 import tinymce from 'tinymce';    //simply import 'tinymce' doesnt work
 //Demo pages
 //https://www.tiny.cloud/docs/tinymce/latest/full-featured-premium-demo/
+//https://skin.tiny.cloud/t5/
 //https://www.tiny.cloud/docs/tinymce/latest/examples/
 //https://www.tiny.cloud/docs/tinymce/latest/plugins/
 //https://www.tiny.cloud/docs/tinymce/latest/full-featured-open-source-demo/
