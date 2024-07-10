@@ -1,0 +1,155 @@
+@import 'fluid-form.theme.less';
+
+// ================================================================ //
+// -- Theme Definition
+
+:host {
+  display: block;
+
+  *,
+  *::after,
+  *::before {
+    box-sizing: border-box;
+  }
+
+  .fluid-form {
+
+    /**
+     * LEGACY THEME
+     */
+    &.legacy {
+      @import '../../styles/variables-iuw-legacy.less';
+      @form-tokens: @form-tokens-legacy;
+      @form();
+    }
+
+    /**
+     * LIBERTY MUTUAL THEME
+     */
+    &.lm {
+      @import '../../styles/variables-lm.less';
+      @form-tokens: @form-tokens-lm;
+      @form();
+    }
+
+    /**
+     * LM CORPORATE THEME
+     */
+    &.corp, &.default {
+      @import '../../styles/variables-lm-corp.less';
+      @form-tokens: @form-tokens-corp;
+      @form();
+    }
+
+    /**
+     * PORTAL THEME
+     */
+    &.portal {
+      @import '../../styles/variables-lm-portal.less';
+      @form-tokens: @form-tokens-portal;
+      @form();
+    }
+  }
+}
+
+
+// ================================================================ //
+// -- Component Detached Ruleset
+
+@form: {
+  font-family: @font-family;
+  font-size: @font-size;
+  font-weight: @font-weight-regular;
+  line-height: @line-height;
+  margin-bottom: 1em;
+
+  // == Remove Bottom Margin
+
+  &.inline {
+    margin-bottom: 0;
+  }
+
+  // ==== Embedded Grid
+
+  fluid-grid {
+
+    // NB: Used to highlight the grid items to aid with debugging layout.
+    // Should really be @internal, but may as well expose the option until
+    // the layout configurator is complete.
+    &.show-grid {
+      fluid-grid-item {
+        border: 1px dotted lightgrey;
+        background-color: #f9f9f9;
+
+        fluid-grid-item {
+          background-color: darken(#f9f9f9, 5%);
+        }
+      }
+    }
+
+    // NB: Used for "grid row" layout only (i.e. "GridRowLayout" functional
+    // component) - removes negative top/bottom margin from each row's
+    // "parent" Grid to offset the negative top/bottom margin of its nested
+    // "child" Grid. Basically, this makes the layout's vertical spacing
+    // (i.e. padding between rows) consistent with all other Form layouts.
+    &.no-vertical-margin {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  // ==== Embedded Grid Item
+
+  fluid-grid-item {
+
+    // == Hidden Field
+
+    &.hidden {
+      display: none !important;
+    }
+
+    // == "Filler" Column ("Row" Layout)
+
+    &.filler-column {
+      padding: 0;
+    }
+
+    // == Vertical Alignment ("Row" Layout)
+
+    &.align-items {
+      display: flex;
+
+      &-start { align-items: flex-start; }
+      &-center { align-items: center; }
+      &-end { align-items: flex-end; }
+      &-stretch { align-items: stretch; }
+      &-baseline { align-items: baseline; }
+
+      & > fluid-form-element {
+        flex: 1 1 auto;
+      }
+    }
+
+    // NB: Used for row/column layout only - shouldn't be needed, as element
+    // widths are controlled at a row level, so no need to pack two fields
+    // into one column - just configure another column for that row!
+    &.has-multiple-elements {
+      display: flex; // Make Grid Item emulate Grid
+      flex-wrap: wrap;
+
+      fluid-grid-item {
+        padding: 0; // Remove padding since parent Grid Item doesn't have negative margins
+
+        & + fluid-grid-item {
+          padding-left: 16px; // Emulate default spacing between consecutive Grid Items
+        }
+      }
+    }
+
+    // == Prevent Form Element Overflow
+
+    & > fluid-form-element {
+      max-width: 100%;
+    }
+  }
+};

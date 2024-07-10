@@ -1,0 +1,197 @@
+@import 'fluid-form-array.theme.less';
+@import '../../styles/mixins/fluid-form-elements.mixin.less';
+
+// ================================================================ //
+// -- Theme Definition
+
+:host {
+  display: block;
+
+  .fluid-form-array {
+
+    /**
+     * LEGACY THEME
+     */
+    &.legacy {
+      @import '../../styles/variables-iuw-legacy.less';
+      @form-array-tokens: @form-array-tokens-legacy;
+      @form-array();
+    }
+
+    /**
+     * LIBERTY MUTUAL THEME
+     */
+    &.lm {
+      @import '../../styles/variables-lm.less';
+      @form-array-tokens: @form-array-tokens-lm;
+      @form-array();
+    }
+
+    /**
+     * LM CORPORATE THEME
+     */
+    &.corp, &.default {
+      @import '../../styles/variables-lm-corp.less';
+      @form-array-tokens: @form-array-tokens-corp;
+      @form-array();
+    }
+
+    /**
+     * PORTAL THEME
+     */
+    &.portal {
+      @import '../../styles/variables-lm-portal.less';
+      @form-array-tokens: @form-array-tokens-portal;
+      @form-array();
+    }
+  }
+}
+
+
+// ================================================================ //
+// -- Component Detached Ruleset
+
+@form-array: {
+  @inline: @form-array-tokens[@inline];
+  @fieldset: @form-array-tokens[@fieldset];
+  @error: @form-array-tokens[@error];
+  @controls: @form-array-tokens[@controls];
+
+  display: flex;
+  flex-direction: column;
+
+  .form-array-master-form {
+    box-sizing: border-box;
+
+    .form-grid {
+      background-color: #fcfcfc;
+      border-radius: 3px;
+      padding: 15px 10px 0px 10px;
+      border: 1px solid #c4c4c4;
+      margin-bottom: 1em;
+    }
+
+    .master-label {
+      font-family: @font-family;
+      background-color: white;
+      -webkit-transition: all 0.15s ease-in-out;
+      transition: all 0.15s ease-in-out;
+      margin-bottom: 0;
+      text-transform: none;
+      font-size: 13px;
+      height: 14px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      z-index: 800;
+      top: -14px;
+      left: 7px;
+      padding-left: 2px;
+      padding-right: 2px;
+    }
+
+    &.table-style {
+      order: 1;
+    }
+    &.form-style {
+      order: 2;
+    }
+  }
+
+  .form-array-table {
+    order: 2;
+  }
+
+  .form-array-forms {
+    order: 1;
+  }
+
+  .inline-action {
+    margin-bottom: @inline[margin-bottom];
+  }
+
+  .input-validation {
+    display: block;
+    font-family: @font-family;
+    font-size: 11px;
+    padding-bottom: 12px;
+
+    &.error {
+      color: @error[color];
+    }
+
+    .message {
+      display: inline-block;
+      margin-top: -2px;
+      margin-left: 5px;
+      line-height: 14px;
+      vertical-align: text-top;
+    }
+  }
+
+  .add-row {
+    text-align: right;
+
+    button {
+      border: none;
+      background-color: transparent;
+      padding: 5px 10px;
+      border-radius: 4px;
+      margin-bottom: 0;
+
+      &:hover {
+        cursor: pointer;
+        background-color: @liberty-gray-4;
+      }
+    }
+  }
+
+  // == Section Detail (Optional)
+
+  .form-array-section-detail {
+    margin-bottom: 1em;
+  }
+
+  // == Entry Container (Fieldset)
+
+  .form-array-fieldset {
+    font-family: @font-family;
+    font-size: @font-size;
+    line-height: @line-height;
+    margin: 0;
+    padding-inline: 0;
+    padding-block-start: 0.5em;
+    padding-block-end: 2em;
+    border-width: 1px 0 0 0;
+    border-color: @fieldset[border-color];
+    border-style: @border-style;
+
+    legend {
+      font-family: inherit;
+      font-size: @fieldset[font-size];
+      line-height: inherit;
+      color: @fieldset[color];
+      font-weight: @font-weight-bold;
+      padding-inline-start: 0;
+      padding-inline-end: 0.5em;
+    }
+
+    .fieldset-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  // == Control Buttons Container
+
+  .form-array-controls {
+    display: flex;
+    justify-content: center;
+    column-gap: 3em;
+  }
+
+  .cancel-container {
+    margin-top: @controls[@cancel][margin-top];
+  }
+}

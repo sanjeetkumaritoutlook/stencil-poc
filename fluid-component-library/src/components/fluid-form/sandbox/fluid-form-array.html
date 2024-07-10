@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>FLUID Form Array</title>
+  <link href="/fluid/build/fluid.css" rel="stylesheet">
+
+  <script>
+    $loadjs("/fluid/build/fluid.esm.js", "/fluid/build/fluid.js");
+    function $loadjs(src, fallback, s) {
+      s = document.createElement('script');
+      if ('noModule' in s) {
+        s.type = 'module';
+        s.src = src;
+      } else {
+        s.async = true;
+        s.src = fallback;
+      }
+      document.head.appendChild(s)
+    }
+  </script>
+</head>
+
+<body>
+
+<fluid-theme-provider theme="corp">
+
+  <fluid-i18n-provider language='en'>
+  <fluid-header fixed-position fluid-logo>
+    <fluid-button-group id="theme-btn-group" slot="header-content"></fluid-button-group>
+  </fluid-header>
+
+  <fluid-page>
+
+    <!-- Page Title & Methods -->
+    <fluid-grid>
+      <fluid-grid-item col-sm="7">
+        <fluid-title level="1">FLUID Form Array</fluid-title>
+      </fluid-grid-item>
+      <fluid-grid-item col-sm="5">
+        <div id="control-center">
+          <fluid-title level="2">Component Methods</fluid-title>
+        </div>
+      </fluid-grid-item>
+    </fluid-grid>
+
+    <!-- Sandbox Area -->
+    <div id="sandbox-area"></div>
+
+  </fluid-page>
+  </fluid-i18n-provider>
+</fluid-theme-provider>
+
+<!-- Load Sandbox Tooling -->
+<script src="./create-element-section.js"></script>
+<script src="./add-method-executors.js"></script>
+<script src="./add-header-theme-switcher.js"></script>
+<script src="./add-event-listener.js"></script>
+<script src="./add-sandbox-i18n.js"></script>
+
+<!-- Load Example Config/Data -->
+<script src="fluid-form-array.config.js"></script>
+
+<!-- Load Component Example Script -->
+<script src="fluid-form-array.js"></script>
+
+</body>

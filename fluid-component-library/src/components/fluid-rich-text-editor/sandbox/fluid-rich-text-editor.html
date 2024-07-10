@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>FLUID Button</title>
+  <link href="/fluid/build/fluid.css" rel="stylesheet">
+  <!-- Theme included stylesheets -->
+  <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+
+  <!-- Core build with no theme, formatting, non-essential modules -->
+  <link href="//cdn.quilljs.com/1.3.6/quill.core.css" rel="stylesheet">
+
+  <script>
+    $loadjs("/fluid/build/fluid.esm.js", "/fluid/build/fluid.js");
+    function $loadjs(src, fallback, s) {
+      s = document.createElement('script');
+      if ('noModule' in s) {
+        s.type = 'module';
+        s.src = src;
+      } else {
+        s.async = true;
+        s.src = fallback;
+      }
+      document.head.appendChild(s)
+    }
+  </script>
+
+  <!-- Load Sandbox Tooling -->
+  <script src="./create-element-section.js"></script>
+  <script src="./add-method-executors.js"></script>
+  <script src="./add-theme-switchers.js"></script>
+  <script src="./add-event-listener.js"></script>
+
+</head>
+
+<body>
+
+<fluid-theme-provider theme="corp">
+
+  <fluid-header fluid-logo></fluid-header>
+
+  <fluid-page page-title="FLUID Rich Text Editor">
+    <!-- Sandbox Area -->
+    <div id="sandbox-area"></div>
+
+    <!-- Methods and Theme Switching -->
+
+    <fluid-grid>
+      <fluid-grid-item col-sm="6">
+        <div id="control-center" style="margin: 20px 0;">
+          <fluid-title level="2">Component Methods</fluid-title>
+        </div>
+      </fluid-grid-item>
+      <fluid-grid-item col-sm="6">
+        <div id="theme-switcher" style="margin: 20px 0;">
+          <fluid-title level="2">Theme Switcher</fluid-title>
+        </div>
+      </fluid-grid-item>
+    </fluid-grid>
+
+  </fluid-page>
+  <fluid-content>
+
+</fluid-theme-provider>
+
+<script src="./fluid-rich-text-editor.js"></script>
+
+</body>

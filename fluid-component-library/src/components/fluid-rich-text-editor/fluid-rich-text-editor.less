@@ -1,0 +1,62 @@
+@import 'fluid-rich-text-editor.theme.less';
+
+// ================================================================ //
+// -- Theme Definition
+
+:host {
+  display: block;
+
+  .fluid-rich-text-editor {
+
+    /**
+     * DEFAULT THEME
+     */
+    &.default {
+      @import '../../styles/variables-iuw.less';
+      @fluid-rich-text-editor-tokens: @fluid-rich-text-editor-tokens-default;
+      @fluid-rich-text-editor();
+    }
+
+    /**
+     * LEGACY THEME
+     */
+    &.legacy {
+      @import '../../styles/variables-iuw-legacy.less';
+      @fluid-rich-text-editor-tokens: @fluid-rich-text-editor-tokens-legacy;
+      @fluid-rich-text-editor();
+    }
+
+    /**
+     * LIBERTY MUTUAL THEME
+     */
+    &.lm {
+      @import '../../styles/variables-lm.less';
+      @fluid-rich-text-editor-tokens: @fluid-rich-text-editor-tokens-lm;
+      @fluid-rich-text-editor();
+    }
+
+    /**
+     * LM CORPORATE THEME
+     */
+    &.corp {
+      @import '../../styles/variables-lm-corp.less';
+      @fluid-rich-text-editor-tokens: @fluid-rich-text-editor-tokens-corp;
+      @fluid-rich-text-editor();
+    }
+
+    /**
+     * PORTAL THEME
+     */
+    &.portal {
+      @import '../../styles/variables-lm-portal.less';
+      @fluid-rich-text-editor-tokens: @fluid-rich-text-editor-tokens-portal;
+      @fluid-rich-text-editor();
+    }
+  }
+}
+
+
+// ================================================================ //
+// -- Component Detached Ruleset
+
+@fluid-rich-text-editor: {}
