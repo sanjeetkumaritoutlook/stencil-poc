@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>About FLUID</h1>
+<p>FLUID is built using TSX (JSX with Typescript), and compiled using <a href="https://stenciljs.com/">StencilJS</a> to create small,fast and 100% standards based Web Components that run in every browser, in every framework.</p>
+<p>When we say framework-agnostic, we mean it.FLUID doesn't care about your framework, it only cares about what you put in, how it should render, and what it should put out.</p>
+<h3>Choosing Web components over Angular Elements</h3>
+<p>iUnderwrite and MyThoughts were written in Angular - our library was an Angular library, so worked seamlessly, but Property applications
+    are written in React.</p>
+	<p>We investigated a few options, primarily using  <a href="https://v17.angular.io/api/elements"> Angular Elements</a> to convert our existing Angular components
+    to custom elements, before repacking, and allowing them to be used in React. This, however, was a lot of overhead when building out components - not just with the additional
+    complexity of using Angular Elements, but also meant that anyone who wanted to contribute to the library also needed an intimate knowledge of Angular.</p>
+	<h4>The Birth of FLUID</h4>
+	<p>We wanted to create a product which was independent and which required no specific knowledge of any particular framework to contribute to.</p>
+	<p>Web components to the rescue</p>
+ <p>As web components are based on existing web standards, they allowed us to build out components in a framework and browser agnostic way. We were able to encapsulate behaviours,
+     styles (using multiple themes) and accessibility into single, framework-independent custom tags which could be used in our Angular apps, our React apps, and beyond.</p>
+<p>Using <a href="https://stenciljs.com/">StencilJS</a> to compile our components to web components, we were able to provide that consistent interface we yearned for. No
+     longer would we see 
+     a or span  tags with inline styling, or selectors spread
+     across multiple files and packages. No, now we had a single tag, that a developer can drop on a page, add a label and handler, and they had their button.</p>
+	 
+   <p><code><fluid-button label="My Button"></fluid-button></code></p>
+   <p>A truly reusable <span style="font-weight: bold;">F<span/>rontend <span style="font-weight: bold;">L<span/>ibrary for <span style="font-weight: bold;">U<span/>ser <span style="font-weight: bold;">I<span/>nterface <span style="font-weight: bold;">D<span/>evelopment was born.</p>
+
+</body>
+</html>
