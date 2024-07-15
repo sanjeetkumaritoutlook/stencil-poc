@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>FLUID Rating</title>
+  <link href="/fluid/build/fluid.css" rel="stylesheet">
+
+  <script>
+    $loadjs('/fluid/build/fluid.esm.js', '/fluid/build/fluid.js');
+
+    function $loadjs(src, fallback, s) {
+      s = document.createElement('script');
+      if ('noModule' in s) {
+        s.type = 'module';
+        s.src = src;
+      } else {
+        s.async = true;
+        s.src = fallback;
+      }
+      document.head.appendChild(s);
+    }
+  </script>
+</head>
+
+<body>
+
+<fluid-theme-provider theme="corp">
+  <fluid-i18n-provider language="en">
+
+    <fluid-header fluid-logo></fluid-header>
+
+    <fluid-page>
+
+      <!-- Page Title -->
+      <fluid-title level="1">FLUID Rating</fluid-title>
+
+      <!-- Sandbox Area -->
+      <div id="sandbox-area"></div>
+
+      <fluid-title level="2">Internationalisation</fluid-title>
+      <fluid-button id="en" label="English"></fluid-button>
+      <fluid-button id="fr" label="French"></fluid-button>
+      <fluid-button id="es" label="Spanish"></fluid-button>
+
+      <!-- Methods and Theme Switching -->
+      <fluid-grid>
+        <fluid-grid-item col-sm="6">
+          <div id="control-center" style="margin: 20px 0;">
+            <fluid-title level="2">Component Methods</fluid-title>
+          </div>
+        </fluid-grid-item>
+        <fluid-grid-item col-sm="6">
+          <div id="theme-switcher" style="margin: 20px 0;">
+            <fluid-title level="2">Theme Switcher</fluid-title>
+          </div>
+        </fluid-grid-item>
+      </fluid-grid>
+
+      <!-- Event Log -->
+      <fluid-grid>
+        <fluid-grid-item col="12" col-md="6">
+          <fluid-title level="2">Event Log</fluid-title>
+          <div id="event-log"></div>
+        </fluid-grid-item>
+      </fluid-grid>
+
+    </fluid-page>
+  </fluid-i18n-provider>
+</fluid-theme-provider>
+
+<!-- Load Sandbox Tooling -->
+<script src="./create-element-section.js"></script>
+<script src="./add-method-executors.js"></script>
+<script src="./add-theme-switchers.js"></script>
+<script src="./add-event-listener.js"></script>
+<script src="./add-sandbox-i18n.js"></script>
+
+<!-- Load Script -->
+<script src="./fluid-rating.js"></script>
+
+</body>
