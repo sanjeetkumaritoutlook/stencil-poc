@@ -76,3 +76,28 @@ The first step for all three of these strategies is to [publish to NPM](https://
 
 ### To install stencil in private corporate LM network
 set NODE_TLS_REJECT_UNAUTHORIZED=0
+
+------------
+FLUID components are web components, not Angular, so they don't natively look for the Angular router, instead, offering an agnostic way to handle routing depending on your framework.
+ 
+In Angular, you would handle the route changed using the Router and the navigate function to route to the requested route in response to the menuItemClicked event.
+ 
+e.g 
+ 
+<fluid-page (menuItemClicked)="handleMenuItemClicked($event)">
+<codeblock>
+handleMenuItemClicked(menuClickEvent) {
+    const route = menuClickEvent.detail;
+    this.router.navigate([route]);
+  }
+ </codeblock>
+  https://stackblitz.com/edit/angular-ivy-ftdguh?file=src%2Fapp%2Fsandbox%2Fsandbox.component.html
+
+
+ Similarly, FLUID form elements have their own state management system, so do not natively bind to FormControl - You can do it, but it isn't a recommended approach, as it would be a double-hop to respond to FLUID events to then update a form control.
+ 
+This example shows how you can;
+https://stackblitz.com/edit/angular-ivy-i6dark?file=src%2Fapp%2Fapp.component.ts
+
+Our recommended approach is to use FLUID forms native state management instead. It works in very similar way to Angular, but is built to be transportable across frameworks.
+ 
