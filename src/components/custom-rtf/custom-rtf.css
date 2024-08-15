@@ -1,12 +1,12 @@
 @import '~tinymce/skins/content/default/content.min.css';
 @import '~tinymce/skins/ui/oxide/skin.min.css';
 /*Import Google fonts*/
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&family=Roboto&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap'); */
 
 :host {
   display: block;

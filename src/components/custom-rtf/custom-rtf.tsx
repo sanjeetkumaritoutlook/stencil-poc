@@ -143,9 +143,48 @@ export class CustomRtf {
       //https://fonts.google.com/specimen/EB+Garamond
       //https://www.tiny.cloud/docs/tinymce/6/migration-from-5x/
       font_family_formats:
-    "Andale Mono=andale mono,times; Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; Book Antiqua=book antiqua,palatino; Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier;Lato Black=lato; Roboto=roboto; Bungee=Bungee;OpenSans=Open Sans;Garamond=EB Garamond;Poppins=Poppins;Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; Oswald=oswald; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats",
+     ` Calibri=Calibri, sans-serif;
+      Andale Mono=andale mono,times;
+      Arial=arial,helvetica,sans-serif; 
+      Arial Black=arial black,avant garde;
+      Book Antiqua=book antiqua,palatino; 
+      Comic Sans MS=comic sans ms,sans-serif; 
+      Courier New=courier new,courier;
+      Lato Black=lato; 
+      Roboto=Roboto, sans-serif;
+      Bungee=Bungee;
+      Open Sans='Open Sans', sans-serif;
+      Lora=Lora, serif;
+      Montserrat=Montserrat, sans-serif;
+      Garamond=Garamond, serif;
+      Poppins=Poppins;
+      Georgia=georgia,palatino; 
+      Helvetica=helvetica;
+      Impact=impact,chicago; 
+      Oswald=Oswald, sans-serif;
+      Symbol=symbol;
+      Tahoma=tahoma,arial,helvetica,sans-serif; 
+      Terminal=terminal,monaco;
+      Times New Roman=times new roman,times; 
+      Trebuchet MS=trebuchet ms,geneva; 
+      Verdana=verdana,geneva; 
+      Webdings=webdings; 
+      Wingdings=wingdings,zapf dingbats`,
      content_css: '../../assets/tinymce/skins/ui/oxide/content.min.css',
-       content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
+      //  content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
+      content_style: `
+      @import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&family=Roboto&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+     @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+     body { font-family: 'Calibri', sans-serif; }
+    `,
+    
      //Set the default font: https://www.tiny.cloud/blog/tinymce-custom-font-family/
        //content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
       //https://www.tiny.cloud/docs/tinymce/latest/tinymce-for-mobile/
