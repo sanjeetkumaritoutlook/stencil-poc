@@ -71,11 +71,17 @@ import 'tinymce/models/dom/model';
  import 'tinymce/plugins/wordcount';
  import 'tinymce/plugins/autolink';
  import 'tinymce/plugins/autosave';
+ import 'tinymce/plugins/save';
  import 'tinymce/plugins/image';
  import 'tinymce/plugins/insertdatetime';
  import 'tinymce/plugins/visualblocks';
  import 'tinymce/plugins/searchreplace';
  import 'tinymce/plugins/media';
+ import 'tinymce/plugins/quickbars';
+ import 'tinymce/plugins/preview';
+ import 'tinymce/plugins/pagebreak';
+ import 'tinymce/plugins/anchor';
+ import 'tinymce/plugins/nonbreaking';
  /* Import premium plugins */
  /* NOTE: Download separately and add these to /src/plugins */
  /* import './plugins/checklist/plugin'; */
@@ -163,7 +169,7 @@ export class CustomRtf {
       //   "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
       //   "save table contextmenu directionality emoticons template paste textcolor filemanager help"
       // ],
-     plugins: [  "code", "table", "link","advlist", "lists","wordcount","autolink","autosave","image","insertdatetime","visualblocks","searchreplace","media"],
+     plugins: [  "code", "table", "link","advlist", "lists","wordcount","autolink","autosave","save","image","insertdatetime","visualblocks","searchreplace","media","quickbars","emoticons","preview","pagebreak","anchor","nonbreaking"],
      // block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
       branding: false,
        menubar: 'file edit view insert format tools table tc help',
@@ -177,9 +183,10 @@ export class CustomRtf {
       // mceInsertClipboardContent: true,
      // noneditable_noneditable_class: 'mceNonEditable',
      image_advtab: true,
-         spellchecker_active: true,
-          spellchecker_language: 'en_US',
-          spellchecker_languages: 'English (United States)=en_US,English (United Kingdom)=en_GB,Danish=da,French=fr,German=de,Italian=it,Polish=pl,Spanish=es,Swedish=sv',
+     quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+      // spellchecker_active: true,
+      // spellchecker_language: 'en_US',
+      // spellchecker_languages: 'English (United States)=en_US,English (United Kingdom)=en_GB,Danish=da,French=fr,German=de,Italian=it,Polish=pl,Spanish=es,Swedish=sv',
       //directly referencing paths within node_modules is not always recommended.
       //CSS hacks
       //https://www.tiny.cloud/blog/css-hacks/
@@ -217,9 +224,11 @@ export class CustomRtf {
       Trebuchet MS=trebuchet ms,geneva; 
       Verdana=verdana,geneva; 
       Webdings=webdings; 
+      Josefin='Josefin Sans', sans-serif; 
       Wingdings=wingdings,zapf dingbats`,
      content_css: '../../assets/tinymce/skins/ui/oxide/content.min.css',
       //  content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
+      //https://www.tiny.cloud/blog/tinymce-css-and-custom-styles/
      content_style: `
       @import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&family=Roboto&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
@@ -231,6 +240,7 @@ export class CustomRtf {
      @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
      @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
      body { font-family: 'Calibri', sans-serif; }
     `,
     
