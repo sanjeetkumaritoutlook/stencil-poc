@@ -3,21 +3,50 @@ import { Component, h, Listen,Prop, Event, EventEmitter ,Watch} from '@stencil/c
 import {  querySelectorDeep} from "query-selector-shadow-dom";
 //https://www.tiny.cloud/docs/advanced/usage-with-module-loaders/webpack/webpack_es6_npm/
 //npm install tinymce
+//copy paste from microsoft word (with formatting intact) works in tinymce version 5
+//npm install tinymce@^5
+
 import tinymce from 'tinymce';    //simply import 'tinymce' doesnt work
 //Demo pages
 //https://www.tiny.cloud/docs/tinymce/latest/full-featured-premium-demo/
-//https://skin.tiny.cloud/t5/
+//https://www.tiny.cloud/docs/tinymce/latest/full-featured-open-source-demo/
+//https://quilljs.com/
+
+//TinyMCE 5 copy paste from Microsoft word
+//https://www.tiny.cloud/docs/tinymce/5/paste-from-word/
+//https://www.tiny.cloud/blog/copy-and-paste-from-word-excel/
+//https://www.tiny.cloud/docs/tinymce/6/powerpaste-options/#powerpaste_word_import
+//https://stackoverflow.com/questions/29997908/paste-from-word-to-tinymce
+//https://stackoverflow.com/questions/1255738/tinymce-and-importing-copy-paste-from-microsoft-word
+
+//power paste functionality of tinymce
+//https://stackoverflow.com/questions/53232048/tinymce-paste-from-word-not-working-properly
+//https://www.tiny.cloud/docs/tinymce/latest/introduction-to-powerpaste/
+//https://github.com/tinymce/tinymce/discussions/7487
+//https://www.tiny.cloud/blog/copy-and-paste-from-word-excel/
+
+//tinymce 5 toolbar
+//https://www.tiny.cloud/blog/tinymce-toolbar/
+//https://stackoverflow.com/questions/36623390/tiny-mce-add-font-dropdown-list
+//https://stackoverflow.com/questions/63486185/tinymce-5-how-can-i-remove-fontname-and-fontsize-from-the-menu
+
+//Tinymce Fiddle
+//https://fiddle.tiny.cloud/xLeaab/0
+//https://fiddle.tiny.cloud/6Leaab/1
+
+//trigger save
+//https://www.tiny.cloud/blog/tinymce-triggersave/
+
 //https://www.tiny.cloud/docs/tinymce/latest/examples/
 //https://www.tiny.cloud/docs/tinymce/latest/plugins/
-//https://www.tiny.cloud/docs/tinymce/latest/full-featured-open-source-demo/
 //$450 per year https://www.tiny.cloud/tinymce-vs-ckeditor/
 //https://ckeditor.com/ckeditor-5/demo/
 
 //https://www.tiny.cloud/docs/tinymce/latest/bundling-models/
-import 'tinymce/models/dom/model';
+//import 'tinymce/models/dom/model';
 
 //https://stackoverflow.com/questions/68951483/tinymce-err-aborted-404-not-found-skins-vue
- /* Default icons are required for TinyMCE 5.3 or above */
+/* Default icons are required for TinyMCE 5.3 or above */
  import 'tinymce/icons/default';
 
  /* A theme is also required */
@@ -45,10 +74,10 @@ import 'tinymce/models/dom/model';
  /* import './plugins/powerpaste/plugin'; */
  /* import './plugins/powerpaste/js/wordimport'; *
 /* Import content css */
-import contentUiCss from 'tinymce/skins/ui/oxide/content.min.css';
-import contentCss from 'tinymce/skins/content/default/content.css';
+//import contentUiCss from 'tinymce/skins/ui/oxide/content.min.css';
+//import contentCss from 'tinymce/skins/content/default/content.css';
 import { myString } from './tablecode';
-//npm install tinymce@^5
+
 //TypeScript needs type definitions to understand the structure of the 'tinymce' module. 
 //npm install --save-dev @types/tinymce
 
@@ -104,9 +133,8 @@ export class CustomRtf {
       promotion: false, //hides the Upgrade promotion button
     // apiKey:"qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc",
     //apiKey="limjfdlb66u3w96h1skw5m93kdvmf55zt4ohb3ol4jeb3q6m",
-    fontsize_formats: "2pt 4pt 6pt 8pt 10pt 12pt 14pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 32pt 34pt 36pt",
-     font_formats: 'Arial=arial,helvetica,sans-serif; Courier New=courier new,courier,monospace; AkrutiKndPadmini=Akpdmi-n',
-     width:'100%',
+   fontsize_formats: '2pt 4pt 6pt 8pt 10pt 12pt 14pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 32pt 34pt 36pt 48pt 60pt 72pt 96pt', 
+    width:'100%',
      height: 350,
      resize:'both', //https://www.tiny.cloud/docs/tinymce/latest/editor-size-options/
      theme: 'silver',        // Choose a theme ('modern', 'silver', 'inlite','mobile' etc.)
@@ -125,12 +153,14 @@ export class CustomRtf {
        block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
       branding: false,
        menubar: 'file edit view insert format tools table tc help',
-       toolbar: "undo redo | formatselect  | accordion accordionremove | blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | ltr rtl",
+       toolbar: "undo redo | formatselect  | accordion accordionremove | blocks fontsizeselect fontselect | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | ltr rtl",
       //  language: 'en', 
        //paste Core plugin options
       paste_block_drop: false,
       paste_data_images: true,
-      paste_as_text: true,          
+      paste_as_text: true,   
+     powerpaste_word_import: 'merge',
+       mceInsertClipboardContent: true,
       noneditable_noneditable_class: 'mceNonEditable',
       //directly referencing paths within node_modules is not always recommended.
       //CSS hacks
@@ -142,14 +172,14 @@ export class CustomRtf {
       //https://www.tiny.cloud/blog/tinymce-google-fonts/
       //https://fonts.google.com/specimen/EB+Garamond
       //https://www.tiny.cloud/docs/tinymce/6/migration-from-5x/
-      font_family_formats:
-     ` Calibri=Calibri, sans-serif;
+       font_formats: `Calibri=Calibri, sans-serif;
       Andale Mono=andale mono,times;
       Arial=arial,helvetica,sans-serif; 
       Arial Black=arial black,avant garde;
+      Noto Serif Devanagari=Noto Serif Devanagari", serif;
       Book Antiqua=book antiqua,palatino; 
       Comic Sans MS=comic sans ms,sans-serif; 
-      Courier New=courier new,courier;
+      Courier New=courier new,courier,monospace;
       Lato Black=lato; 
       Roboto=Roboto, sans-serif;
       Bungee=Bungee;
@@ -172,7 +202,7 @@ export class CustomRtf {
       Wingdings=wingdings,zapf dingbats`,
      content_css: '../../assets/tinymce/skins/ui/oxide/content.min.css',
       //  content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
-      content_style: `
+     content_style: `
       @import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&family=Roboto&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
@@ -182,6 +212,7 @@ export class CustomRtf {
       @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap');
      @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+     @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@100..900&display=swap');
      body { font-family: 'Calibri', sans-serif; }
     `,
     
@@ -193,7 +224,8 @@ export class CustomRtf {
         width:'100%',
         height: 350,
         menubar: true,
-        plugins: ['autosave', 'lists', 'autolink']
+        plugins: ['autosave', 'lists', 'autolink','table', 'link', 'advlist', 'code'],
+        toolbar: 'undo bold italic styleselect fontsizeselect fontselect',
       },
       //setup callback assigns the editor 
       setup: (editor) => {
@@ -222,6 +254,8 @@ export class CustomRtf {
 
       editor.on('blur', () => {
         this.editorBlur.emit();
+         tinymce.triggerSave();
+        console.log('Trigger save working');
       });
       //https://www.tiny.cloud/docs/tinymce/latest/apis/tinymce.editormode/#set
       //https://stackoverflow.com/questions/13881812/make-readonly-disable-tinymce-textarea
