@@ -3,16 +3,22 @@ import { Component, h, Listen,Prop, Event, EventEmitter ,Watch} from '@stencil/c
 import {  querySelectorDeep} from "query-selector-shadow-dom";
 //https://www.tiny.cloud/docs/advanced/usage-with-module-loaders/webpack/webpack_es6_npm/
 //npm install tinymce
-//copy paste from microsoft word (with formatting intact) works in tinymce version 5
-//npm install tinymce@^5
+//TinyMCE 7.3 was released for TinyMCE Enterprise and Tiny Cloud on Wednesday, August 7th, 2024
+//npm install tinymce@^7
 
 import tinymce from 'tinymce';    //simply import 'tinymce' doesnt work
 //Demo pages
 //https://www.tiny.cloud/docs/tinymce/latest/full-featured-premium-demo/
 //https://www.tiny.cloud/docs/tinymce/latest/full-featured-open-source-demo/
+
+//https://www.tiny.cloud/docs/tinymce/latest/examples/#general-examples
 //https://quilljs.com/
 
-//TinyMCE 5 copy paste from Microsoft word
+//TinyMCE 7 copy paste from Microsoft word
+//https://www.tiny.cloud/docs/tinymce/latest/npm-projects/
+//https://www.tiny.cloud/docs/tinymce/latest/webpack-es6-npm/
+//https://www.tiny.cloud/blog/tinymce-noneditable/
+
 //https://www.tiny.cloud/docs/tinymce/5/paste-from-word/
 //https://www.tiny.cloud/blog/copy-and-paste-from-word-excel/
 //https://www.tiny.cloud/docs/tinymce/6/powerpaste-options/#powerpaste_word_import
@@ -43,7 +49,7 @@ import tinymce from 'tinymce';    //simply import 'tinymce' doesnt work
 //https://ckeditor.com/ckeditor-5/demo/
 
 //https://www.tiny.cloud/docs/tinymce/latest/bundling-models/
-//import 'tinymce/models/dom/model';
+import 'tinymce/models/dom/model';
 
 //https://stackoverflow.com/questions/68951483/tinymce-err-aborted-404-not-found-skins-vue
 /* Default icons are required for TinyMCE 5.3 or above */
@@ -53,7 +59,7 @@ import tinymce from 'tinymce';    //simply import 'tinymce' doesnt work
  import 'tinymce/themes/silver';
  /* Import the skin */
  import 'tinymce/skins/ui/oxide/skin.css';
-
+//https://www.tiny.cloud/blog/fixing-plugin-errors/
  /* Import plugins */
  import 'tinymce/plugins/advlist';
  import 'tinymce/plugins/code';
@@ -67,7 +73,9 @@ import tinymce from 'tinymce';    //simply import 'tinymce' doesnt work
  import 'tinymce/plugins/autosave';
  import 'tinymce/plugins/image';
  import 'tinymce/plugins/insertdatetime';
-
+ import 'tinymce/plugins/visualblocks';
+ import 'tinymce/plugins/searchreplace';
+ import 'tinymce/plugins/media';
  /* Import premium plugins */
  /* NOTE: Download separately and add these to /src/plugins */
  /* import './plugins/checklist/plugin'; */
@@ -80,6 +88,7 @@ import { myString } from './tablecode';
 
 //TypeScript needs type definitions to understand the structure of the 'tinymce' module. 
 //npm install --save-dev @types/tinymce
+//https://www.tiny.cloud/docs/tinymce/latest/content-formatting/
 
 //stackblitz
 // https://stackblitz.com/github/ionic-team/stencil-component-starter?file=readme.md
@@ -120,6 +129,8 @@ export class CustomRtf {
    // Check if editor is already initialized
    if (!this.editor) {
     const textarea = querySelectorDeep('#my-tinymce-component');
+    const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches;
     if (textarea) {
     tinymce.init({
       //Create a configuration object for TinyMCE. Customize it according to your needs:
@@ -131,9 +142,12 @@ export class CustomRtf {
        //https://www.tiny.cloud/docs/configure/editor-appearance/#skin_url
        //https://www.tiny.cloud/docs/tinymce/latest/basic-setup/ 
       promotion: false, //hides the Upgrade promotion button
+      license_key: 'gpl',
     // apiKey:"qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc",
     //apiKey="limjfdlb66u3w96h1skw5m93kdvmf55zt4ohb3ol4jeb3q6m",
-   fontsize_formats: '2pt 4pt 6pt 8pt 10pt 12pt 14pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 32pt 34pt 36pt 48pt 60pt 72pt 96pt', 
+    //https://www.tiny.cloud/blog/custom-font-sizes-in-tinymce/
+      //HTML custom font options
+    font_size_formats: '2pt 4pt 6pt 8pt 10pt 12pt 14pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 32pt 34pt 36pt 48pt 60pt 72pt 96pt', 
     width:'100%',
      height: 350,
      resize:'both', //https://www.tiny.cloud/docs/tinymce/latest/editor-size-options/
@@ -149,19 +163,23 @@ export class CustomRtf {
       //   "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
       //   "save table contextmenu directionality emoticons template paste textcolor filemanager help"
       // ],
-     plugins: [  "code", "table", "link","advlist", "lists","wordcount","autolink","autosave","image","insertdatetime"],
-       block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
+     plugins: [  "code", "table", "link","advlist", "lists","wordcount","autolink","autosave","image","insertdatetime","visualblocks","searchreplace","media"],
+     // block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
       branding: false,
        menubar: 'file edit view insert format tools table tc help',
-       toolbar: "undo redo | formatselect  | accordion accordionremove | blocks fontsizeselect fontselect | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | ltr rtl",
+       toolbar: "undo redo | formatselect  | accordion accordionremove | blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | alignleft aligncenter alignright alignjustify | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | ltr rtl",
       //  language: 'en', 
        //paste Core plugin options
       paste_block_drop: false,
       paste_data_images: true,
-      paste_as_text: true,   
-     powerpaste_word_import: 'merge',
-       mceInsertClipboardContent: true,
-      noneditable_noneditable_class: 'mceNonEditable',
+      //paste_as_text: true,   
+    // powerpaste_word_import: 'merge',
+      // mceInsertClipboardContent: true,
+     // noneditable_noneditable_class: 'mceNonEditable',
+     image_advtab: true,
+         spellchecker_active: true,
+          spellchecker_language: 'en_US',
+          spellchecker_languages: 'English (United States)=en_US,English (United Kingdom)=en_GB,Danish=da,French=fr,German=de,Italian=it,Polish=pl,Spanish=es,Swedish=sv',
       //directly referencing paths within node_modules is not always recommended.
       //CSS hacks
       //https://www.tiny.cloud/blog/css-hacks/
@@ -172,7 +190,7 @@ export class CustomRtf {
       //https://www.tiny.cloud/blog/tinymce-google-fonts/
       //https://fonts.google.com/specimen/EB+Garamond
       //https://www.tiny.cloud/docs/tinymce/6/migration-from-5x/
-       font_formats: `Calibri=Calibri, sans-serif;
+      font_family_formats: `Calibri=Calibri, sans-serif;
       Andale Mono=andale mono,times;
       Arial=arial,helvetica,sans-serif; 
       Arial Black=arial black,avant garde;
@@ -225,7 +243,7 @@ export class CustomRtf {
         height: 350,
         menubar: true,
         plugins: ['autosave', 'lists', 'autolink','table', 'link', 'advlist', 'code'],
-        toolbar: 'undo bold italic styleselect fontsizeselect fontselect',
+        toolbar: 'undo bold italic styleselect fontfamily fontsize',
       },
       //setup callback assigns the editor 
       setup: (editor) => {
