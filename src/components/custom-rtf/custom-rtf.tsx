@@ -109,6 +109,8 @@ export class CustomRtf {
   @Prop({ mutable: true, reflect: true }) initialvalue: string;
   //to control whether the tinymce editor is editable
   @Prop() disabled: boolean = false; 
+  @Prop() disableQuickbars: boolean = false;
+
   @Element() el: HTMLElement;
 
   @Event() valueChange: EventEmitter<string>;
@@ -185,7 +187,12 @@ export class CustomRtf {
       // mceInsertClipboardContent: true,
      // noneditable_noneditable_class: 'mceNonEditable',
      image_advtab: true,
-     quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+     quickbars_insert_toolbar: this.disableQuickbars
+     ? false // Disable the quickbars insert toolbar if the prop is true
+     : 'quicktable image media codesample',
+     quickbars_selection_toolbar: this.disableQuickbars
+     ? false // Disable the quickbars selection toolbar if the prop is true
+     : 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
       // spellchecker_active: true,
       // spellchecker_language: 'en_US',
       // spellchecker_languages: 'English (United States)=en_US,English (United Kingdom)=en_GB,Danish=da,French=fr,German=de,Italian=it,Polish=pl,Spanish=es,Swedish=sv',

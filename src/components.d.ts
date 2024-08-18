@@ -7,6 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface CustomRtf {
+        "disableQuickbars": boolean;
         "disabled": boolean;
         "initialvalue": string;
     }
@@ -91,6 +92,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface CustomRtf {
+        "disableQuickbars"?: boolean;
         "disabled"?: boolean;
         "initialvalue"?: string;
         "onContentChanged"?: (event: CustomRtfCustomEvent<any>) => void;
