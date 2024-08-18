@@ -1,6 +1,6 @@
-import { Component, h, Listen,Prop, Event, EventEmitter ,Watch} from '@stencil/core';
+import { Component, h, Listen,Prop, Event, EventEmitter ,Watch,Element} from '@stencil/core';
 //npm i query-selector-shadow-dom
-import {  querySelectorDeep} from "query-selector-shadow-dom";
+//import {  querySelectorDeep} from "query-selector-shadow-dom";
 //https://www.tiny.cloud/docs/advanced/usage-with-module-loaders/webpack/webpack_es6_npm/
 //npm install tinymce
 //TinyMCE 7.3 was released for TinyMCE Enterprise and Tiny Cloud on Wednesday, August 7th, 2024
@@ -103,12 +103,13 @@ import { myString } from './tablecode';
 @Component({
   tag: 'custom-rtf',
   styleUrl: 'custom-rtf.css',
-  shadow: true,
+  shadow: false, // Disable Shadow DOM
 })
 export class CustomRtf {
   @Prop({ mutable: true, reflect: true }) initialvalue: string;
   //to control whether the tinymce editor is editable
   @Prop() disabled: boolean = false; 
+  @Element() el: HTMLElement;
 
   @Event() valueChange: EventEmitter<string>;
   @Event() editorFocus: EventEmitter<void>;
@@ -134,14 +135,15 @@ export class CustomRtf {
   componentDidLoad() {
    // Check if editor is already initialized
    if (!this.editor) {
-    const textarea = querySelectorDeep('#my-tinymce-component');
+    const textarea = document.querySelector('#my-tinymce-component');
     const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches;
+    //this if condition is not required
     if (textarea) {
     tinymce.init({
       //Create a configuration object for TinyMCE. Customize it according to your needs:
      // selector: 'textarea',
-     target: textarea,  // HTML element convert into a TinyMCE editor.
+     target: this.el.querySelector('#my-tinymce-component'),  // HTML element convert into a TinyMCE editor.
       placeholder: 'Type here...',
        // Other configurations...
        //https://www.tiny.cloud/docs/configure/integration-and-setup/
@@ -336,9 +338,9 @@ export class CustomRtf {
   }
   //componentDidUnload() deprecated
   disconnectedCallback() {
-    // tinymce.remove(`#my-tinymce-component`);
-    const el = querySelectorDeep('#my-tinymce-component');
-    tinymce.remove(el);
+    // const el = querySelectorDeep('#my-tinymce-component');
+    // tinymce.remove(el);
+    tinymce.remove(`#my-tinymce-component`);
     this.editor = null; // Clear the reference during component unload
   }
   render() {

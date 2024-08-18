@@ -1,6 +1,8 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { CustomRtf } from '../custom-rtf';
-import tinymce from './__mocks__/tinymce';    // import 'tinymce' from mock
+//https://stenciljs.com/docs/unit-testing
+//To run unit tests, run stencil test --spec
+import tinymce from '../../../helpers/__mocks__/tinymce';    // import 'tinymce' from mock
 jest.mock('tinymce');
 
 describe('custom-rtf', () => {
