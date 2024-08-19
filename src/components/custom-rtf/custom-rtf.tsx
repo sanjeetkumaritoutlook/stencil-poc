@@ -11,6 +11,9 @@ import tinymce from 'tinymce';    //simply import 'tinymce' doesnt work
 //https://www.tiny.cloud/docs/tinymce/latest/full-featured-premium-demo/
 //https://www.tiny.cloud/docs/tinymce/latest/full-featured-open-source-demo/
 
+//AI Assistant demo
+//https://www.tiny.cloud/docs/tinymce/latest/ai/
+
 //https://www.tiny.cloud/docs/tinymce/latest/examples/#general-examples
 //https://quilljs.com/
 
