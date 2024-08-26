@@ -1,0 +1,22 @@
+Global PI planning
+----------------------------
+With the overall fallout from the Crowdstrike update still yet to be determined, resiliency is a hot topic around the globe. When something goes down, or services cannot be accessed, there can be wide ranging effects on businesses, and society at large.
+
+Resiliency is core to what we promote with FLUID, we help teams keep their apps up to date, and continuously roll out runtime enhancements that provide new features and functionality at scale to GRS users. FLUID also helps to create a resilient user base who can easily recognize features and functionalities through reuse of common patterns and components.
+A central part of FLUID’s resiliency plan has been the ability to provide component updates and features to everyone, at runtime. Runtime updates are possible because our code is housed and retrieved from an AWS S3 architecture within a GRS domain that is home to some of our most business critical applications. This setup has served us well, but we have reached a point where it’s time to move out of our old environment, and into new AWS environments that are set up specifically for FLUID.
+
+There are many benefits to this migration and change in architecture, including production code being backed by multi-region failovers, a Tier 0 Disaster Recovery plan, back up environments and Cloudfront as standard across every environment, making FLUID the most resilient and secure as it has ever been before.
+-----------------
+What does this mean?
+-------------------------
+More security and more resiliency, and more controls available to our team. With multi-region failovers for instance, in the rare event that one AWS locale experiences issues, traffic will seamlessly route to a second region ensuring no interruption of services. (link from 2023AWS Outage Analysis: June 13, 2023 (thousandeyes.com)) Please note that FLUID was not in fact effected by last years AWS outage 
+The move brings with it many opportunities, and to maintain continuity while we worked through this process, we have already moved our code to a new repository, with new pipelines and environments. The current project artifacts remained unaffected.
+
+---------------------------
+depending on your FLUID initialization strategy.
+------------------------------------
+This update uses the new domains in
+fluid.init()
+, but also adds environment healthchecks, which ensure that if an environment is down for any reason, your app will automatically switch to the next available stable environment, ensuring continuity at all times.
+• For those users still using script loaders;
+Production: https://fluid-components.lmig.com/
