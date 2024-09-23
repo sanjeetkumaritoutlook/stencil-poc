@@ -18,3 +18,24 @@
   box-shadow: none !important;
   outline: none !important;
 } */
+
+
+    /*changing tinymce editor default style*/
+       #my-tinymce-component+.tox.tox-tinymce {
+        min-height: calc(var(--G-form-element-height) - (var(--G-border-width) * 2));
+        padding-top: var(--form-element-padding-top);
+        padding-bottom: var(--form-element-padding-bottom);
+        border-top-right-radius: calc(var(--G-border-radius) + 1px);
+        border-bottom-right-radius: calc(var(--G-border-radius) + 1px);
+        resize: vertical;
+        -ms-overflow-style: none;
+        border-style: solid;
+        border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+        border-width: 1px;
+      }
+      
+      #my-tinymce-component+.tox {
+        .tox-statusbar__resize-handle {
+          display: none;
+        }
+      }

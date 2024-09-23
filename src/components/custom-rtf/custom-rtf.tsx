@@ -1,6 +1,6 @@
 import { Component, h, Listen,Prop, Event, EventEmitter ,Watch,Element} from '@stencil/core';
 //npm i query-selector-shadow-dom
-//import {  querySelectorDeep} from "query-selector-shadow-dom";
+import {  querySelectorDeep} from "query-selector-shadow-dom";
 //https://www.tiny.cloud/docs/advanced/usage-with-module-loaders/webpack/webpack_es6_npm/
 //npm install tinymce
 //TinyMCE 7.3 was released for TinyMCE Enterprise and Tiny Cloud on Wednesday, August 7th, 2024
@@ -51,6 +51,9 @@ import tinymce from 'tinymce';    //simply import 'tinymce' doesnt work
 //$450 per year https://www.tiny.cloud/tinymce-vs-ckeditor/
 //https://ckeditor.com/ckeditor-5/demo/
 
+// Tinymce cdn link
+//https://cdn.jsdelivr.net/npm/tinymce@7.3.0/
+
 //https://www.tiny.cloud/docs/tinymce/latest/bundling-models/
 import 'tinymce/models/dom/model';
 
@@ -85,6 +88,14 @@ import 'tinymce/models/dom/model';
  import 'tinymce/plugins/pagebreak';
  import 'tinymce/plugins/anchor';
  import 'tinymce/plugins/nonbreaking';
+ import 'tinymce/plugins/accordion';
+import 'tinymce/plugins/autoresize';
+import 'tinymce/plugins/charmap';
+import 'tinymce/plugins/codesample';
+import 'tinymce/plugins/directionality';
+import 'tinymce/plugins/help';
+import 'tinymce/plugins/help/js/i18n/keynav/en';
+import 'tinymce/plugins/fullscreen';
  /* Import premium plugins */
  /* NOTE: Download separately and add these to /src/plugins */
  /* import './plugins/checklist/plugin'; */
@@ -106,13 +117,19 @@ import { myString } from './tablecode';
 @Component({
   tag: 'custom-rtf',
   styleUrl: 'custom-rtf.css',
-  shadow: false, // Disable Shadow DOM
+  shadow: true, // Enable Shadow DOM
 })
 export class CustomRtf {
+  private editor: any; // Store a reference to the TinyMCE editor instance
+ 
   @Prop({ mutable: true, reflect: true }) initialvalue: string;
   //to control whether the tinymce editor is editable
   @Prop() disabled: boolean = false; 
   @Prop() disableQuickbars: boolean = false;
+/**
+   * Optional placeholder text displayed when the form field is empty.
+   */
+@Prop({ mutable: true }) placeholder: string;
 
   @Element() el: HTMLElement;
 
@@ -127,8 +144,7 @@ export class CustomRtf {
    // this.skinUrl = 'node_modules/tinymce/skins/ui/oxide';
   }
 
-  private editor: any; // Store a reference to the TinyMCE editor instance
- // @State() editor: any; // Assuming you have a state variable to hold the Tinymce editor instance
+  // @State() editor: any; // Assuming you have a state variable to hold the Tinymce editor instance
 
  @Watch('value')
  onValueChange(newValue: string) {
@@ -140,7 +156,7 @@ export class CustomRtf {
   componentDidLoad() {
    // Check if editor is already initialized
    if (!this.editor) {
-    const textarea = document.querySelector('#my-tinymce-component');
+    const textarea = querySelectorDeep('#my-tinymce-component');
     const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches;
     //this if condition is not required
@@ -148,14 +164,15 @@ export class CustomRtf {
     tinymce.init({
       //Create a configuration object for TinyMCE. Customize it according to your needs:
      // selector: 'textarea',
-     target: this.el.querySelector('#my-tinymce-component'),  // HTML element convert into a TinyMCE editor.
-      placeholder: 'Type here...',
+     target: textarea,  // HTML element convert into a TinyMCE editor.
+      placeholder: this.placeholder,
        // Other configurations...
        //https://www.tiny.cloud/docs/configure/integration-and-setup/
        //https://www.tiny.cloud/docs/configure/editor-appearance/#skin_url
        //https://www.tiny.cloud/docs/tinymce/latest/basic-setup/ 
       promotion: false, //hides the Upgrade promotion button
       license_key: 'gpl',
+      highlight_on_focus: false,
     // apiKey:"qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc",
     //apiKey="limjfdlb66u3w96h1skw5m93kdvmf55zt4ohb3ol4jeb3q6m",
     //https://www.tiny.cloud/blog/custom-font-sizes-in-tinymce/
@@ -163,20 +180,19 @@ export class CustomRtf {
     font_size_formats: '2pt 4pt 6pt 8pt 10pt 12pt 14pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 32pt 34pt 36pt 48pt 60pt 72pt 96pt', 
     width:'100%',
      height: 350,
-     resize:'both', //https://www.tiny.cloud/docs/tinymce/latest/editor-size-options/
+    //  resize:'both', //https://www.tiny.cloud/docs/tinymce/latest/editor-size-options/
      theme: 'silver',        // Choose a theme ('modern', 'silver', 'inlite','mobile' etc.)
      //https://www.tiny.cloud/docs/tinymce/latest/editor-skin/
      //skin: 'oxide',
      skin: false,
-     //Copy Tinymce assets to a local folder, for example, 'src/assets/tinymce/'.
-    skin_url: '../../assets/tinymce/skins/ui/oxide',
+     skin_url: 'https://cdn.jsdelivr.net/npm/tinymce@7.3.0/skins/ui/oxide',
     //skin_url: this.skinUrl,
       // plugins: [
       //   "powerpaste advlist advtable autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
       //   "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
       //   "save table contextmenu directionality emoticons template paste textcolor filemanager help"
       // ],
-     plugins: [  "code", "table", "link","advlist", "lists","wordcount","autolink","autosave","save","image","insertdatetime","visualblocks","searchreplace","media","quickbars","emoticons","preview","pagebreak","anchor","nonbreaking"],
+      plugins: ["accordion", "autoresize", "charmap", "code", "directionality", "help", "fullscreen", "codesample", "table",  "link","advlist", "lists","wordcount","autolink","autosave","save","image","insertdatetime","visualblocks","searchreplace","media","quickbars","emoticons","preview","pagebreak","anchor","nonbreaking"],
      // block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
       branding: false,
        menubar: 'file edit view insert format tools table tc help',
@@ -189,7 +205,11 @@ export class CustomRtf {
     // powerpaste_word_import: 'merge',
       // mceInsertClipboardContent: true,
      // noneditable_noneditable_class: 'mceNonEditable',
-     image_advtab: true,
+     image_title: true,
+      help_accessibility: false,
+      image_advtab: true,
+      min_height: 350,
+      max_height: 400,
      quickbars_insert_toolbar: this.disableQuickbars
      ? false // Disable the quickbars insert toolbar if the prop is true
      : 'quicktable image media codesample',
@@ -238,7 +258,7 @@ export class CustomRtf {
       Webdings=webdings; 
       Josefin='Josefin Sans', sans-serif; 
       Wingdings=wingdings,zapf dingbats`,
-     content_css: '../../assets/tinymce/skins/ui/oxide/content.min.css',
+      content_css: 'https://cdn.jsdelivr.net/npm/tinymce@7.3.0/skins/ui/oxide/content.min.css',
       //  content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
       //https://www.tiny.cloud/blog/tinymce-css-and-custom-styles/
      content_style: `
@@ -348,9 +368,9 @@ export class CustomRtf {
   }
   //componentDidUnload() deprecated
   disconnectedCallback() {
-    // const el = querySelectorDeep('#my-tinymce-component');
-    // tinymce.remove(el);
-    tinymce.remove(`#my-tinymce-component`);
+    const el = querySelectorDeep('#my-tinymce-component');
+    tinymce.remove(el);
+    // tinymce.remove(`#my-tinymce-component`);
     this.editor = null; // Clear the reference during component unload
   }
   render() {
@@ -359,7 +379,10 @@ export class CustomRtf {
     return (
        <div id={editorId}>
         {/* <button onClick={() => this.handleEvent()}>Click me</button> */}
-        <div id="my-tinymce-component" innerHTML={this.initialvalue}></div>
+        <div id="my-tinymce-component"
+         innerHTML={this.initialvalue}
+         aria-disabled={this.disabled}
+         aria-placeholder={this.placeholder}></div>
         <button onClick={() => this.getContentFromEditor()}>Get Content/Save </button>
        <button onClick={() => this.setContentInEditor(myString)}>Set Content</button>
         <button onClick={() => this.setContentInEditor('')}>Clear Content</button>

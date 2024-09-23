@@ -10,6 +10,10 @@ export namespace Components {
         "disableQuickbars": boolean;
         "disabled": boolean;
         "initialvalue": string;
+        /**
+          * Optional placeholder text displayed when the form field is empty.
+         */
+        "placeholder": string;
     }
     interface MyComponent {
         /**
@@ -99,6 +103,10 @@ declare namespace LocalJSX {
         "onEditorBlur"?: (event: CustomRtfCustomEvent<void>) => void;
         "onEditorFocus"?: (event: CustomRtfCustomEvent<void>) => void;
         "onValueChange"?: (event: CustomRtfCustomEvent<string>) => void;
+        /**
+          * Optional placeholder text displayed when the form field is empty.
+         */
+        "placeholder"?: string;
     }
     interface MyComponent {
         /**
