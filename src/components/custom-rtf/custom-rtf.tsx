@@ -1,6 +1,6 @@
 import { Component, h, Listen,Prop, Event, EventEmitter ,Watch,Element} from '@stencil/core';
 //npm i query-selector-shadow-dom
-import {  querySelectorDeep} from "query-selector-shadow-dom";
+//import {  querySelectorDeep} from "query-selector-shadow-dom";
 //https://www.tiny.cloud/docs/advanced/usage-with-module-loaders/webpack/webpack_es6_npm/
 //npm install tinymce
 //TinyMCE 7.3 was released for TinyMCE Enterprise and Tiny Cloud on Wednesday, August 7th, 2024
@@ -96,6 +96,8 @@ import 'tinymce/plugins/directionality';
 import 'tinymce/plugins/help';
 import 'tinymce/plugins/help/js/i18n/keynav/en';
 import 'tinymce/plugins/fullscreen';
+import 'tinymce/plugins/importcss';
+import 'tinymce/plugins/visualchars';
  /* Import premium plugins */
  /* NOTE: Download separately and add these to /src/plugins */
  /* import './plugins/checklist/plugin'; */
@@ -156,9 +158,12 @@ export class CustomRtf {
   componentDidLoad() {
    // Check if editor is already initialized
    if (!this.editor) {
-    const textarea = querySelectorDeep('#my-tinymce-component');
-    const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches;
+    //const textarea = querySelectorDeep('#my-tinymce-component');
+    const textarea : any = document
+  .querySelector('custom-rtf')
+  .shadowRoot.querySelector('div > #my-tinymce-component');
+    //const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+   // const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches;
     //this if condition is not required
     if (textarea) {
     tinymce.init({
@@ -177,7 +182,7 @@ export class CustomRtf {
     //apiKey="limjfdlb66u3w96h1skw5m93kdvmf55zt4ohb3ol4jeb3q6m",
     //https://www.tiny.cloud/blog/custom-font-sizes-in-tinymce/
       //HTML custom font options
-    font_size_formats: '2pt 4pt 6pt 8pt 10pt 12pt 14pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 32pt 34pt 36pt 48pt 60pt 72pt 96pt', 
+    font_size_formats: '2pt 4pt 6pt 8pt 9pt 10pt 11pt 12pt 14pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 32pt 34pt 36pt 48pt 60pt 72pt 96pt', 
     width:'100%',
      height: 350,
     //  resize:'both', //https://www.tiny.cloud/docs/tinymce/latest/editor-size-options/
@@ -192,7 +197,7 @@ export class CustomRtf {
       //   "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
       //   "save table contextmenu directionality emoticons template paste textcolor filemanager help"
       // ],
-      plugins: ["accordion", "autoresize", "charmap", "code", "directionality", "help", "fullscreen", "codesample", "table",  "link","advlist", "lists","wordcount","autolink","autosave","save","image","insertdatetime","visualblocks","searchreplace","media","quickbars","emoticons","preview","pagebreak","anchor","nonbreaking"],
+      plugins: ["accordion", "autoresize", "charmap", "code", "directionality", "importcss","help", "fullscreen", "codesample", "table",  "link","advlist", "lists","wordcount","autolink","autosave","save","image","insertdatetime","visualblocks","visualchars","searchreplace","media","quickbars","emoticons","preview","pagebreak","anchor","nonbreaking"],
      // block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
       branding: false,
        menubar: 'file edit view insert format tools table tc help',
@@ -205,6 +210,8 @@ export class CustomRtf {
     // powerpaste_word_import: 'merge',
       // mceInsertClipboardContent: true,
      // noneditable_noneditable_class: 'mceNonEditable',
+     importcss_append: true,
+    toolbar_mode: 'sliding',
      image_title: true,
       help_accessibility: false,
       image_advtab: true,
@@ -368,7 +375,10 @@ export class CustomRtf {
   }
   //componentDidUnload() deprecated
   disconnectedCallback() {
-    const el = querySelectorDeep('#my-tinymce-component');
+    //const el = querySelectorDeep('#my-tinymce-component');
+    const el : any =  document
+  .querySelector('custom-rtf')
+  .shadowRoot.querySelector('div > #my-tinymce-component');
     tinymce.remove(el);
     // tinymce.remove(`#my-tinymce-component`);
     this.editor = null; // Clear the reference during component unload
