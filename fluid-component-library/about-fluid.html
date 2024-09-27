@@ -22,6 +22,57 @@
 	 
    <p><code><fluid-button label="My Button"></fluid-button></code></p>
    <p>A truly reusable <span style="font-weight: bold;">F<span/>rontend <span style="font-weight: bold;">L<span/>ibrary for <span style="font-weight: bold;">U<span/>ser <span style="font-weight: bold;">I<span/>nterface <span style="font-weight: bold;">D<span/>evelopment was born.</p>
+<h2>old version (AngularJS )-v1</h2>
+<p>FLUID is a suite of runtime web components, so will work with any version of Angular. It works particularly will with Angular 2+ which supports complex properties on web components out of the box.
+ 
+But, it will work with AngularJS if necessary (although, given AngularJS end of life, we definitely recommend migrating to Angular 2+), you just need to set complex properties on the element reference itself, rather than in the template, but given the nature of FLUIDs configuration, it's pretty intuitive doing it that way.
+ 
+Angular 1.7 introduced ng-prop which allowed you to pass complex properties easily. The difficulty here, is that when you use the data-items={{...}} syntax, your array is converted to a string, so no longer an array.
+ 
+Would probably need to have a tinker to remember the best way to set complex properties on a web component in a version that old. What app is it and i'll take a look? 
+ 
+Pretty sure you'll need to inject $element to get access to the compiled template to grab the element and set the props in the controller..... but would need to double check and document
+Because of the version, you'll need to go a little old school to pass complex properties (arrays, objects, etc). So, in your template, just add the table tag with an id.
+ </p>
+ <p><code>
+<fluid-table id="someTable"></fluid-table></code></p>
+ <p>
+Then, in your controller, use angular.element and getElementById to get the reference to the element, and then set the props on it. You'll need to check that the element exists, as I have in the example here, but you could tidy that up a little with another utility function if you wish.
+ </p>
+ <p><code>
+cruwCtrl.setTableProps = (headers, dataItems, tableId) => {
+    
+    // Get the table - be aware, this will return an array
+    const tables = angular.element(document.getElementById('someTable'));
+ 
+    // Check that the array has your table in it, before you start setting props.
+    if (tables.length > 0) {
+        
+        // Set your properties
+        tables[0].headers = headers;
+        tables[0].dataItems = dataItems;
+        tables[0].tableId = tableId;
+    } else {
+        // show alert or something, element doesn't exist.
+    }
+};
+</code></p>
+ <p>
+The same will likely apply with events, you'd use addEventListener('event', (data) => // handle event) - there may well be a more angularJS way to do it in that version, but I haven't look too much into it
+For simple props, you should just be able to use interpolation, as in your first example. For complex props, starting from angularJS 1.8, you have access to ng-prop-<propName>, but you shouldn't need that for alert (and cruw-ui is using 1.5, so that won't work anyways!)
+ 
+Ctrl+[  ->  move left
+  Ctrl+ ]  ->  move right
+  https://stackoverflow.com/questions/47903209/how-to-shift-a-block-of-code-left-right-by-one-space-in-vscode
+  ng e2e
+  ng test 
+  https://comparecloud.in/
+  
+  Tree shaking is a term commonly used within a JavaScript context to describe the removal of dead code.
+  https://developer.mozilla.org/en-US/docs/Glossary/Tree_shaking
+  In modern JavaScript applications, we use module bundlers (e.g., webpack or Rollup) to automatically remove dead code when bundling multiple JavaScript files into single files. This is important for preparing code that is production ready, for example with clean structures and minimal file size.
 
+  StencilJS  generated bundle is tree-shakable, ensuring that only imported components will end up in the build.
+</p>
 </body>
 </html>

@@ -20,3 +20,7 @@ fluid.init()
 , but also adds environment healthchecks, which ensure that if an environment is down for any reason, your app will automatically switch to the next available stable environment, ensuring continuity at all times.
 • For those users still using script loaders;
 Production: https://fluid-components.lmig.com/
+External production URL:
+https://fluid.libertymutual.com/
+https://fluid.libertymutual.com/fluid/fluid-form.html
+https://fluid.libertymutual.com/fluid/fluid-form-array.html
