@@ -45,6 +45,14 @@ npm test
 
 Need help? Check out our docs [here](https://stenciljs.com/docs/my-first-component).
 
+## create new component in stenciljs
+To create a new component in StencilJS, you can use the npm run generate command or the stencil generate command: 
+Run npm run generate or stencil generate 
+Provide the name of the component you want to create 
+A new folder will be created in the components folder with the name of the component
+https://stenciljs.com/docs/getting-started
+
+npm run start
 
 ## Naming Components
 

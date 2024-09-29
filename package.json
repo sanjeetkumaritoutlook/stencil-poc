@@ -27,7 +27,9 @@
   },
   "dependencies": {
     "@stencil/core": "^3.0.0",
+    "@tinymce/tinymce-webcomponent": "^2.1.0",
     "query-selector-shadow-dom": "^1.0.1",
+    "quill": "^2.0.2",
     "tinymce": "^7.3.0",
     "url-loader": "^4.1.1"
   },

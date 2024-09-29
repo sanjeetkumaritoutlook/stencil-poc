@@ -124,7 +124,7 @@ import { myString } from './tablecode';
 export class CustomRtf {
   private editor: any; // Store a reference to the TinyMCE editor instance
  
-  @Prop({ mutable: true, reflect: true }) initialvalue: string;
+  @Prop({ mutable: true, reflect: true }) initialValue: string;
   //to control whether the tinymce editor is editable
   @Prop() disabled: boolean = false; 
   @Prop() disableQuickbars: boolean = false;
@@ -390,7 +390,7 @@ export class CustomRtf {
        <div id={editorId}>
         {/* <button onClick={() => this.handleEvent()}>Click me</button> */}
         <div id="my-tinymce-component"
-         innerHTML={this.initialvalue}
+         innerHTML={this.initialValue}
          aria-disabled={this.disabled}
          aria-placeholder={this.placeholder}></div>
         <button onClick={() => this.getContentFromEditor()}>Get Content/Save </button>

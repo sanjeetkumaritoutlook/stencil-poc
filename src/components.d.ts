@@ -9,7 +9,7 @@ export namespace Components {
     interface CustomRtf {
         "disableQuickbars": boolean;
         "disabled": boolean;
-        "initialvalue": string;
+        "initialValue": string;
         /**
           * Optional placeholder text displayed when the form field is empty.
          */
@@ -40,6 +40,15 @@ export namespace Components {
          */
         "apiKey": string;
         "refreshCryptoData": () => Promise<void>;
+    }
+    interface QuillEditor {
+        "initialValue": any;
+        "readOnly": boolean;
+    }
+    interface RichTextEditor {
+        "apiKey": string;
+        "disabled": boolean;
+        "initialValue": string;
     }
     interface RtfEditor {
     }
@@ -79,6 +88,18 @@ declare global {
         prototype: HTMLPayformComponentElement;
         new (): HTMLPayformComponentElement;
     };
+    interface HTMLQuillEditorElement extends Components.QuillEditor, HTMLStencilElement {
+    }
+    var HTMLQuillEditorElement: {
+        prototype: HTMLQuillEditorElement;
+        new (): HTMLQuillEditorElement;
+    };
+    interface HTMLRichTextEditorElement extends Components.RichTextEditor, HTMLStencilElement {
+    }
+    var HTMLRichTextEditorElement: {
+        prototype: HTMLRichTextEditorElement;
+        new (): HTMLRichTextEditorElement;
+    };
     interface HTMLRtfEditorElement extends Components.RtfEditor, HTMLStencilElement {
     }
     var HTMLRtfEditorElement: {
@@ -91,6 +112,8 @@ declare global {
         "my-new-component": HTMLMyNewComponentElement;
         "page-home": HTMLPageHomeElement;
         "payform-component": HTMLPayformComponentElement;
+        "quill-editor": HTMLQuillEditorElement;
+        "rich-text-editor": HTMLRichTextEditorElement;
         "rtf-editor": HTMLRtfEditorElement;
     }
 }
@@ -98,7 +121,7 @@ declare namespace LocalJSX {
     interface CustomRtf {
         "disableQuickbars"?: boolean;
         "disabled"?: boolean;
-        "initialvalue"?: string;
+        "initialValue"?: string;
         "onContentChanged"?: (event: CustomRtfCustomEvent<any>) => void;
         "onEditorBlur"?: (event: CustomRtfCustomEvent<void>) => void;
         "onEditorFocus"?: (event: CustomRtfCustomEvent<void>) => void;
@@ -133,6 +156,15 @@ declare namespace LocalJSX {
          */
         "apiKey"?: string;
     }
+    interface QuillEditor {
+        "initialValue"?: any;
+        "readOnly"?: boolean;
+    }
+    interface RichTextEditor {
+        "apiKey"?: string;
+        "disabled"?: boolean;
+        "initialValue"?: string;
+    }
     interface RtfEditor {
     }
     interface IntrinsicElements {
@@ -141,6 +173,8 @@ declare namespace LocalJSX {
         "my-new-component": MyNewComponent;
         "page-home": PageHome;
         "payform-component": PayformComponent;
+        "quill-editor": QuillEditor;
+        "rich-text-editor": RichTextEditor;
         "rtf-editor": RtfEditor;
     }
 }
@@ -153,6 +187,8 @@ declare module "@stencil/core" {
             "my-new-component": LocalJSX.MyNewComponent & JSXBase.HTMLAttributes<HTMLMyNewComponentElement>;
             "page-home": LocalJSX.PageHome & JSXBase.HTMLAttributes<HTMLPageHomeElement>;
             "payform-component": LocalJSX.PayformComponent & JSXBase.HTMLAttributes<HTMLPayformComponentElement>;
+            "quill-editor": LocalJSX.QuillEditor & JSXBase.HTMLAttributes<HTMLQuillEditorElement>;
+            "rich-text-editor": LocalJSX.RichTextEditor & JSXBase.HTMLAttributes<HTMLRichTextEditorElement>;
             "rtf-editor": LocalJSX.RtfEditor & JSXBase.HTMLAttributes<HTMLRtfEditorElement>;
         }
     }

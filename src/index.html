@@ -7,6 +7,10 @@
 
     <script type="module" src="/build/my-first-stencil-project.esm.js"></script>
     <script nomodule src="/build/my-first-stencil-project.js"></script>
+    <!--this below tag is important to load tinymce-webcomponent without any valid API key error-->
+    <!--but webcomponent version is only 2.1.0 compared to 7.3.0-->
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@7.3.0/tinymce.min.js"></script>
+    <!--proper cdn: https://cdn.tiny.cloud/1/${this.apiKey}/tinymce/5/tinymce.min.js-->
     <!-- <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-webcomponent@1/dist/tinymce-webcomponent.js"></script> -->
     <!-- <script src="../node_modules/tinymce/tinymce.min.js" referrerpolicy="origin"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/tinymce.min.js"></script>
@@ -16,7 +20,11 @@
   <body>
     <h1>RTF editor</h1>
     <!-- <rtf-editor></rtf-editor> -->
-    <custom-rtf initialvalue="this is initial value" placeholder="sanjeet rte mvp"></custom-rtf>
+    <custom-rtf initial-value="this is initial value" placeholder="sanjeet rte mvp"></custom-rtf>
+    <h2>tinymce-webcomponent: Perplexity AI</h2>
+    <rich-text-editor initial-value="This will be the initial content of the editor sanjeet" api-key="gpl"></rich-text-editor>
+    <h2>QuillJS Editor</h2>
+    <quill-editor initial-value="<p>Hello, World!</p>" read-only="false"></quill-editor>
     <!-- <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component> -->
     <payform-component amount-payable="5000"  api-key="fd937be4428d64cf4dd1b51146aef28e46d224aea7ea5bdfbbb6d296a05ec1a9"> 
       <slot name='my-title' />
