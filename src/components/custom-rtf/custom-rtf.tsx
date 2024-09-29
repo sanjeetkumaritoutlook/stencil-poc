@@ -5,7 +5,7 @@ import { Component, h, Listen,Prop, Event, EventEmitter ,Watch,Element} from '@s
 //npm install tinymce
 //TinyMCE 7.3 was released for TinyMCE Enterprise and Tiny Cloud on Wednesday, August 7th, 2024
 //npm install tinymce@^7
-
+//key editor options: https://www.tiny.cloud/docs/tinymce/latest/editor-important-options/
 import tinymce from 'tinymce';    //simply import 'tinymce' doesnt work
 //Demo pages
 //https://www.tiny.cloud/docs/tinymce/latest/full-featured-premium-demo/

@@ -23,11 +23,11 @@ export class RtfEditor {
   render() {
     return (
       <Host>
-      <tinymce-editor api-key="qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc"
+      {/*commenting it to render tinymce-webcomponent version:<tinymce-editor api-key="qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc"
       id="rteInput"
       value={this.value}
       on-GetContent={(event)=>this.handleChange(event)}
-      setup="setupEditor"></tinymce-editor>
+      setup="setupEditor"></tinymce-editor> */}
       </Host>
     );
   }
