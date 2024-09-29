@@ -1,6 +1,8 @@
-import { Component, Prop,Host, h,Element } from '@stencil/core';
+import { Component, Prop, h,Element } from '@stencil/core';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css'; // Import Quill styles
+import 'quill/dist/quill.core.css'; // Import core Quill CSS
+
 //https://www.npmjs.com/package/quill
 
 @Component({
@@ -14,6 +16,7 @@ export class QuillEditor {
   @Element() el: HTMLElement;
 
   private quill: Quill;
+  
   componentDidLoad() {
     const container : any = 
 this.el.shadowRoot.querySelector('#quill-editor-child');    

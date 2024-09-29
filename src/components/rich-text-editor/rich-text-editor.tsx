@@ -1,4 +1,4 @@
-import { Component, Prop,Host, h } from '@stencil/core';
+import { Component, Prop, h } from '@stencil/core';
 import '@tinymce/tinymce-webcomponent';
 //https://www.npmjs.com/package/@tinymce/tinymce-webcomponent
 //<tinymce-editor></tinymce-editor> tag  is used in place of calling tinymce.init(). 
@@ -26,7 +26,7 @@ export class RichTextEditor {
   @Prop() disabled: boolean = false;
 
   private handleEditorChange(value: string, editor: any) {
-    console.log('Editor content:', value);
+    console.log(editor,'Editor content:', value);
   }
   
   //error: All created TinyMCE editors are configured to be read-only.
@@ -48,12 +48,14 @@ export class RichTextEditor {
       height= "350"
       branding= "false"
       promotion= "false"
-      highlight_on_focus= 'false'
+      // highlight_on_focus= 'false'
+      resize="both"
       menubar= 'file edit view insert format tools table tc help'
       fontsize_formats= '2pt 4pt 6pt 8pt 9pt 10pt 11pt 12pt 14pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 32pt 34pt 36pt 48pt 60pt 72pt 96pt'
       font_formats= 'Oswald=Oswald, sans-serif; Lato=Lato, sans-serif; Arial=Arial, sans-serif;'
       importcss_append= "true"
       toolbar_mode= 'sliding'
+      // icons= 'material'
       image_title= 'true'
       help_accessibility= 'false'
       image_advtab= 'true'
