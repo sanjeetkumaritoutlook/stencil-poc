@@ -3,6 +3,7 @@ import '@tinymce/tinymce-webcomponent';
 //https://www.npmjs.com/package/@tinymce/tinymce-webcomponent
 //<tinymce-editor></tinymce-editor> tag  is used in place of calling tinymce.init(). 
 //https://www.npmjs.com/package/@tinymce/tinymce-angular
+//tinymce-webcomponent 2.1.0 uses TinyMCE 6.8.4
 //license_key:
 //https://www.tiny.cloud/docs/tinymce/latest/license-key/
 //https://www.tiny.cloud/docs/tinymce/latest/webcomponent-cloud/
@@ -39,7 +40,8 @@ export class RichTextEditor {
   render() {
     return (
       <tinymce-editor
-      api-key={this.apiKey}
+      // api-key={this.apiKey}
+      api-key="cmqwl6iz4i59bnwa3ymilh2bdmnhxkth1wi8w6v2vumhpw37"
       initial-value={this.initialValue}
       disabled={this.disabled}
       onEditorChange={(event) => this.handleEditorChange(event.detail.value, event.detail.editor)}
@@ -58,6 +60,8 @@ export class RichTextEditor {
       font_formats= 'Andale Mono=andale mono,times; Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; Book Antiqua=book antiqua,palatino; Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats; Oswald=Oswald, sans-serif; Lato=Lato, sans-serif; Arial=Arial, sans-serif;'
       importcss_append= "true"
       toolbar_mode= 'sliding'
+      // tinycomments_mode= 'embedded'
+      // tinycomments_author= 'Sanjeet Kumar'
       // icons= 'material'
       image_title= 'true'
       help_accessibility= 'false'
