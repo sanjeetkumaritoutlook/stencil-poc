@@ -14,6 +14,7 @@ export namespace Components {
           * Optional placeholder text displayed when the form field is empty.
          */
         "placeholder": string;
+        "value": string;
     }
     interface MyComponent {
         /**
@@ -130,6 +131,7 @@ declare namespace LocalJSX {
           * Optional placeholder text displayed when the form field is empty.
          */
         "placeholder"?: string;
+        "value"?: string;
     }
     interface MyComponent {
         /**

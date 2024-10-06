@@ -131,8 +131,8 @@ export class CustomRtf {
 /**
    * Optional placeholder text displayed when the form field is empty.
    */
-@Prop({ mutable: true }) placeholder: string;
-
+ @Prop({ mutable: true }) placeholder: string;
+ @Prop({ mutable: true }) value: string;
   @Element() el: HTMLElement;
 
   @Event() valueChange: EventEmitter<string>;
@@ -159,9 +159,8 @@ export class CustomRtf {
    // Check if editor is already initialized
    if (!this.editor) {
     //const textarea = querySelectorDeep('#my-tinymce-component');
-    const textarea : any = document
-  .querySelector('custom-rtf')
-  .shadowRoot.querySelector('div > #my-tinymce-component');
+    //https://stenciljs.com/docs/host-element
+    const textarea : any = this.el.shadowRoot.querySelector('div > #my-tinymce-component');
     //const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
    // const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches;
     //this if condition is not required
@@ -376,9 +375,7 @@ export class CustomRtf {
   //componentDidUnload() deprecated
   disconnectedCallback() {
     //const el = querySelectorDeep('#my-tinymce-component');
-    const el : any =  document
-  .querySelector('custom-rtf')
-  .shadowRoot.querySelector('div > #my-tinymce-component');
+    const el : any =  this.el.shadowRoot.querySelector('div > #my-tinymce-component');
     tinymce.remove(el);
     // tinymce.remove(`#my-tinymce-component`);
     this.editor = null; // Clear the reference during component unload
