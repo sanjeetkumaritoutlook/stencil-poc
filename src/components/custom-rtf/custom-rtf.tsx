@@ -6,7 +6,7 @@ import { Component, h, Listen,Prop, Event, EventEmitter ,Watch,Element} from '@s
 //TinyMCE 7.3 was released for TinyMCE Enterprise and Tiny Cloud on Wednesday, August 7th, 2024
 //npm install tinymce@^7
 //key editor options: https://www.tiny.cloud/docs/tinymce/latest/editor-important-options/
-import tinymce from 'tinymce';    //simply import 'tinymce' doesnt work
+import tinymce from 'tinymce/tinymce';    //simply import 'tinymce' doesnt work
 //Demo pages
 //https://www.tiny.cloud/docs/tinymce/latest/full-featured-premium-demo/
 //https://www.tiny.cloud/docs/tinymce/latest/full-featured-open-source-demo/
@@ -133,6 +133,10 @@ export class CustomRtf {
    */
  @Prop({ mutable: true }) placeholder: string;
  @Prop({ mutable: true }) value: string;
+ @Prop() fontFamily: string = 'Calibri'; // Default font family doesnt work when initialvalue has font
+ @Prop() fontSize: string = '14px'; // Default font size prop
+  
+
   @Element() el: HTMLElement;
 
   @Event() valueChange: EventEmitter<string>;
@@ -154,9 +158,14 @@ export class CustomRtf {
      this.editor.setContent(newValue);
    }
  }
-  //initialize TinyMCE properly within your component. lifecycle method
-  componentDidLoad() {
-   // Check if editor is already initialized
+ @Watch('fontFamily')
+  watchFontFamily(newValue: string) {
+    if (this.editor) {
+      this.editor.execCommand('FontName', false, newValue);
+    }
+  }
+  initTinyMCE() {
+     // Check if editor is already initialized
    if (!this.editor) {
     //const textarea = querySelectorDeep('#my-tinymce-component');
     //https://stenciljs.com/docs/host-element
@@ -279,7 +288,7 @@ export class CustomRtf {
      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
      @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@100..900&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
-     body { font-family: 'Calibri', sans-serif; }
+     }
     `,
     
      //Set the default font: https://www.tiny.cloud/blog/tinymce-custom-font-family/
@@ -296,7 +305,11 @@ export class CustomRtf {
       //setup callback assigns the editor 
       setup: (editor) => {
         this.editor = editor; // Store the editor instance
-
+        editor.on('init', () => {
+          //https://www.tiny.cloud/docs/tinymce/latest/editor-command-identifiers/
+          editor.execCommand('FontName', false, this.fontFamily);
+          editor.getBody().style.fontSize = this.fontSize; // Set default font size
+        });
         editor.on('change keyup', () => {
           const content = editor.getContent();
           this.valueChange.emit(content);
@@ -333,6 +346,11 @@ export class CustomRtf {
   
   }
   }
+  }
+  //initialize TinyMCE properly within your component. lifecycle method
+  componentDidLoad() {
+    this.initTinyMCE();
+
   }
 
     // Custom logic to handle input events

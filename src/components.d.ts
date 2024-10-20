@@ -9,6 +9,8 @@ export namespace Components {
     interface CustomRtf {
         "disableQuickbars": boolean;
         "disabled": boolean;
+        "fontFamily": string;
+        "fontSize": string;
         "initialValue": string;
         /**
           * Optional placeholder text displayed when the form field is empty.
@@ -122,6 +124,8 @@ declare namespace LocalJSX {
     interface CustomRtf {
         "disableQuickbars"?: boolean;
         "disabled"?: boolean;
+        "fontFamily"?: string;
+        "fontSize"?: string;
         "initialValue"?: string;
         "onContentChanged"?: (event: CustomRtfCustomEvent<any>) => void;
         "onEditorBlur"?: (event: CustomRtfCustomEvent<void>) => void;
