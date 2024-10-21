@@ -1,0 +1,102 @@
+
+import { Config } from '@stencil/core';
+import { JsonDocs } from '@stencil/core/internal';
+import { less } from '@stencil/less';
+import { sass } from '@stencil/sass';
+import { webTypesOutputTarget } from '@stencil-community/web-types-output-target';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
+import { inlineSvg } from 'stencil-inline-svg';
+
+import { customDocsGenerator } from './custom-docs.generator';
+
+export const config: Config = {
+  namespace: 'fluid',
+  globalStyle: 'src/scss/main.scss',
+  buildEs5: 'prod',
+  preamble: 'Built with ❤️ by the FLUID Team @ Liberty Mutual',
+  extras: {
+    scriptDataOpts: true,
+    __deprecated__shadowDomShim: true,
+    __deprecated__dynamicImportShim: true,
+    __deprecated__safari10: true,
+  },
+  rollupPlugins: {
+    after: [nodePolyfills()],
+  },
+  outputTargets: [
+    {
+      type: 'dist',
+      esmLoaderPath: '../loader',
+    },
+    {
+      type: 'docs-custom',
+      generator: (docs: JsonDocs) => {
+        customDocsGenerator(docs);
+      },
+    },
+    {
+      type: 'www',
+      baseUrl: 'fluid',
+      serviceWorker: null,
+      copy: [
+        {
+          src: 'pages/*.*',
+          dest: './',
+          warn: true,
+        },
+        {
+          src: 'components/**/sandbox/*.*',
+          dest: './',
+          warn: true,
+        },
+        {
+          src: 'patterns/**/sandbox/*.*',
+          dest: './',
+          warn: true,
+        },
+        {
+          src: 'tooling/sandbox/*.*',
+          dest: './',
+          warn: true,
+        },
+      ],
+    },
+    webTypesOutputTarget({
+      outFile: './src/assets/web-types/fluid-web-types.json',
+    }),
+  ],
+  plugins: [less(), sass(), inlineSvg()],
+  watchIgnoredRegex: /\.*\.json$/,
+  testing: {
+    transform: {
+      '^.+\\.svg$': './svg-mock-transformer.js',
+    },
+    reporters: [
+      'default',
+      [
+        'jest-junit',
+        {
+          outputDirectory: './target/reports',
+          outputName: 'jest-junit.xml',
+        },
+      ],
+    ],
+    transformIgnorePatterns: ['./node_modules/(?!@lmig/.*)'],
+    watchPathIgnorePatterns: [
+      '<rootDir>/../target/',
+      '<rootDir>/src/assets/api-docs/',
+    ],
+    collectCoverage: true,
+    coverageDirectory: '../target/jest/coverage',
+    testResultsProcessor: './node_modules/jest-json-reporter',
+    coverageThreshold: {
+      // @TODO Update!!!!
+      global: {
+        // branches: 80,
+        // functions: 85,
+        // lines: 85,
+        // statements: 85
+      },
+    },
+  },
+};
